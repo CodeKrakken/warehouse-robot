@@ -7,6 +7,7 @@ class Robot
   end
 
   def e
+    @location[0] = @location[0] + 1
   end
-  
+
 end

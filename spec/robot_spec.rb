@@ -10,4 +10,10 @@ describe Robot do
     expect(subject).to respond_to :e
   end
 
+  it 'moves one space east when e is called' do
+    subject.e
+    expect(subject.location[0]).to eq 1
+  end
+
 end
+

@@ -7,11 +7,11 @@ describe Robot do
   end
 
   it 'responds to e' do
-    expect(subject).to respond_to :e
+    expect(subject).to respond_to :instruct
   end
 
   it 'moves one space east when e is called' do
-    subject.e
+    subject.instruct('e')
     expect(subject.location[0]).to eq 1
   end
 

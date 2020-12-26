@@ -4,3 +4,5 @@ robot
 robot.location
 robot.instruct('e')
 robot.location
+robot.instruct('w')
+robot.location

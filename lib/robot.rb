@@ -7,11 +7,8 @@ class Robot
   end
 
   def instruct(instruction)
-    @location[0] += 1 if instruction = 'e'
-  end
-
-  def e
-    @location[0] = @location[0] + 1
+    @location[0] += 1 if instruction == 'e'
+    @location[0] -= 1 if instruction == 'w'
   end
 
 end

@@ -11,3 +11,4 @@ robot.location
 robot.instruct('s')
 robot.location
 robot.instruct('b')
+6.times { robot.instruct('n') }

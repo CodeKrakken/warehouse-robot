@@ -13,12 +13,17 @@ class Robot
     when 'w'
       @location[0] -= 1
     when 'n'
-      @location[1] += 1
+      move_north
     when 's'
       @location[1] -= 1
     else
       return
     end
+  end
+
+  def move_north
+    @location[1] += 1 unless @location[1] >= 5
+    return @location[1]
   end
 
 end

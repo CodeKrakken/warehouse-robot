@@ -26,5 +26,10 @@ describe Robot do
   it 'moves one space south when s is called' do
     expect(subject.instruct('s')).to eq -1
   end
+
+  it 'does not respond to incorrect instructions' do
+    expect(subject.instruct('b')).to eq nil
+  end
+
 end
 

@@ -10,3 +10,4 @@ robot.instruct('n')
 robot.location
 robot.instruct('s')
 robot.location
+robot.instruct('b')

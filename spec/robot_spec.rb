@@ -11,8 +11,8 @@ describe Robot do
   end
 
   it 'moves one space east when e is called' do
-    subject.instruct('e')
-    expect(subject.location[0]).to eq 1
+    
+    expect(subject.instruct('e')).to eq 1
   end
 
   it 'moves one space west when w is called' do

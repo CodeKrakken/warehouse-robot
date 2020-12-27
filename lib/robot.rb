@@ -14,6 +14,8 @@ class Robot
       @location[0] -= 1
     when 'n'
       @location[1] += 1
+    when 's'
+      @location[1] -= 1
     else
       return
     end

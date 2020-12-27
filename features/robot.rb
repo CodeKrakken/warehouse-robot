@@ -8,3 +8,5 @@ robot.instruct('w')
 robot.location
 robot.instruct('n')
 robot.location
+robot.instruct('s')
+robot.location

@@ -6,3 +6,5 @@ robot.instruct('e')
 robot.location
 robot.instruct('w')
 robot.location
+robot.instruct('n')
+robot.location

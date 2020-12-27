@@ -20,6 +20,9 @@ describe Robot do
     expect(subject.location[0]).to eq -1
   end
 
+  it 'moves one space north when n is called' do
+    expect(subject.instruct('n')).to eq 1
+  end
 
 end
 

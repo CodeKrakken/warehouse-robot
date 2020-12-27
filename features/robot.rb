@@ -11,5 +11,9 @@ robot.location
 robot.instruct('s')
 robot.location
 robot.instruct('b')
-6.times { robot.instruct('n') }
+5.times { robot.instruct('n') }
 robot.location
+robot.instruct('n')
+10.times { robot.instruct('s') }
+robot.location
+robot.instruct('s')

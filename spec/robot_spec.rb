@@ -36,5 +36,10 @@ describe Robot do
     expect(subject.instruct('n')).to eq [0, 5]
   end
 
+  it 'will not move outside warehouse south wall' do
+    5.times { subject.instruct('s') }
+    expect(subject.instruct('s')).to eq [0, -5]
+  end
+
 end
 

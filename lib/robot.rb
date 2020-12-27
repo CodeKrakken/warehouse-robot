@@ -9,13 +9,13 @@ class Robot
   def instruct(instruction)
     case instruction
     when 'e'
-      @location[0] += 1
+      move_east
     when 'w'
-      @location[0] -= 1
+      move_west
     when 'n'
       move_north
     when 's'
-      @location[1] -= 1
+      move_south
     else
       return
     end
@@ -23,7 +23,21 @@ class Robot
 
   def move_north
     @location[1] += 1 unless @location[1] >= 5
-    return @location[1]
+    return @location
   end
 
+  def move_east
+    @location[0] += 1
+    return @location
+  end
+
+  def move_west
+    @location[0] -= 1
+    return @location
+  end
+
+  def move_south
+    @location[1] -= 1 unless @location[1] <= -5
+    return @location
+  end
 end

@@ -12,19 +12,19 @@ describe Robot do
 
   it 'moves one space east when e is called' do
     
-    expect(subject.instruct('e')).to eq 1
+    expect(subject.instruct('e')).to eq [1, 0]
   end
 
   it 'moves one space west when w is called' do
-    expect(subject.instruct('w')).to eq -1
+    expect(subject.instruct('w')).to eq [-1, 0]
   end
 
   it 'moves one space north when n is called' do
-    expect(subject.instruct('n')).to eq 1
+    expect(subject.instruct('n')).to eq [0, 1]
   end
 
   it 'moves one space south when s is called' do
-    expect(subject.instruct('s')).to eq -1
+    expect(subject.instruct('s')).to eq [0, -1]
   end
 
   it 'does not respond to incorrect instructions' do
@@ -33,7 +33,7 @@ describe Robot do
 
   it 'will not move outside warehouse north wall' do
     5.times { subject.instruct('n') }
-    expect(subject.instruct('n')).to eq 5
+    expect(subject.instruct('n')).to eq [0, 5]
   end
 
 end

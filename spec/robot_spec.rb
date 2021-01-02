@@ -27,17 +27,17 @@ describe Robot do
   end
 
   it 'does not respond to incorrect instructions' do
-    expect(subject.instruct('b')).to eq nil
+    expect(subject.instruct('b')).to eq "Invalid instruction."
   end
 
   it 'will not move outside warehouse north wall' do
     5.times { subject.instruct('n') }
-    expect(subject.instruct('n')).to eq "Cannot move there."
+    expect(subject.instruct('n')).to eq "Invalid instruction."
   end
 
   it 'will not move outside warehouse south wall' do
     5.times { subject.instruct('s') }
-    expect(subject.instruct('s')).to eq "Cannot move there."
+    expect(subject.instruct('s')).to eq "Invalid instruction."
   end
 
 end

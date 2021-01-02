@@ -7,51 +7,12 @@ class Robot
   end
 
   def instruct(instruction)
-    @instruction = instruction
-    case @instruction
-    when 'e'
-      move_east
-    when 'w'
-      move_west
-    when 'n'
-      move_north
-    when 's'
-      move_south
-    else
-      return
-    end
-  end
-
-  def move_north
-    if allowed?
-      @location[1] += 1 
-      @location
-    else
-      error
-    end
-  end
-
-  def move_east
-    if allowed?
-      @location[0] += 1
-      @location
-    else
-      error
-    end
-  end
-
-  def move_west
-    if allowed?
-      @location[0] -= 1
-      @location
-    else
-      error
-    end
-  end
-
-  def move_south
-    if allowed?
-      @location[1] -= 1
+    @instruction = instruction  
+    if allowed? 
+      @location[1] += 1 if @instruction == 'n'
+      @location[0] += 1 if @instruction == 'e'
+      @location[0] -= 1 if @instruction == 'w'
+      @location[1] -= 1 if @instruction == 's'
       @location
     else
       error
@@ -68,6 +29,6 @@ class Robot
   end
 
   def error
-    "Cannot move there."
+    "Invalid instruction."
   end
 end

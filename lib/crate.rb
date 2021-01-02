@@ -2,7 +2,7 @@ class Crate
 
   attr_reader :location
 
-  def initialize
-    @location = [0, 0]
+  def initialize(x, y)
+    @location = [x, y]
   end
 end

@@ -22,7 +22,7 @@ class Robot
   end
 
   def move_north
-    @location[1] += 1 unless @location[1] >= 5
+    @location[1] += 1 if allowed?
     return @location
   end
 
@@ -37,7 +37,11 @@ class Robot
   end
 
   def move_south
-    @location[1] -= 1 unless @location[1] <= -5
+    @location[1] -= 1 if allowed? # unless @location[1] <= -5
     return @location
+  end
+
+  def allowed?
+    @location[1].abs < 5
   end
 end

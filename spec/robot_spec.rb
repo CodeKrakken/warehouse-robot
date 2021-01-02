@@ -11,7 +11,6 @@ describe Robot do
   end
 
   it 'moves one space east when e is called' do
-    
     expect(subject.instruct('e')).to eq [1, 0]
   end
 
@@ -33,12 +32,12 @@ describe Robot do
 
   it 'will not move outside warehouse north wall' do
     5.times { subject.instruct('n') }
-    expect(subject.instruct('n')).to eq [0, 5]
+    expect(subject.instruct('n')).to eq "Cannot move there."
   end
 
   it 'will not move outside warehouse south wall' do
     5.times { subject.instruct('s') }
-    expect(subject.instruct('s')).to eq [0, -5]
+    expect(subject.instruct('s')).to eq "Cannot move there."
   end
 
 end

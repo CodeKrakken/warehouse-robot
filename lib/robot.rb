@@ -7,7 +7,8 @@ class Robot
   end
 
   def instruct(instruction)
-    case instruction
+    @instruction = instruction
+    case @instruction
     when 'e'
       move_east
     when 'w'
@@ -22,26 +23,51 @@ class Robot
   end
 
   def move_north
-    @location[1] += 1 if allowed?
-    return @location
+    if allowed?
+      @location[1] += 1 
+      @location
+    else
+      error
+    end
   end
 
   def move_east
-    @location[0] += 1
-    return @location
+    if allowed?
+      @location[0] += 1
+      @location
+    else
+      error
+    end
   end
 
   def move_west
-    @location[0] -= 1
-    return @location
+    if allowed?
+      @location[0] -= 1
+      @location
+    else
+      error
+    end
   end
 
   def move_south
-    @location[1] -= 1 if allowed? # unless @location[1] <= -5
-    return @location
+    if allowed?
+      @location[1] -= 1
+      @location
+    else
+      error
+    end
   end
 
+  private
+
   def allowed?
-    @location[1].abs < 5
+    return @location[1] < 5 if @instruction == 'n'
+    return @location[1] > -5 if @instruction == 's'
+    return @location[0] < 5 if @instruction == 'e'
+    return @location[0] > -5 if @instruction == 'w'
+  end
+
+  def error
+    "Cannot move there."
   end
 end

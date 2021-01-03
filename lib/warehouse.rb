@@ -8,4 +8,8 @@ class Warehouse
     @crates = []
   end
 
+  def receive(crate)
+    @crates.push(crate)
+  end
+
 end

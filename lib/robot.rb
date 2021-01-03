@@ -7,28 +7,49 @@ class Robot
   end
 
   def instruct(instruction)
-    @instruction = instruction  
-    if allowed? 
-      @location[1] += 1 if @instruction == 'n'
-      @location[0] += 1 if @instruction == 'e'
-      @location[0] -= 1 if @instruction == 'w'
-      @location[1] -= 1 if @instruction == 's'
+    case instruction
+    when 'n'
+      move('n')
+    when 'e'
+      move('e')
+    when 's'
+      move('s')
+    when 'w'
+      move('w')
+    when 'g'
+      grab
+    else
+      error
+    end
+    
+  end
+
+  private
+
+  def move(direction)
+    if allowed?(direction)
+      @location[1] += 1 if direction == 'n'
+      @location[0] += 1 if direction == 'e'
+      @location[0] -= 1 if direction == 'w'
+      @location[1] -= 1 if direction == 's'
       @location
     else
       error
     end
   end
 
-  private
-
-  def allowed?
-    return @location[1] < 5 if @instruction == 'n'
-    return @location[1] > -5 if @instruction == 's'
-    return @location[0] < 5 if @instruction == 'e'
-    return @location[0] > -5 if @instruction == 'w'
+  def allowed?(direction)
+    return @location[1] < 5 if direction == 'n'
+    return @location[1] > -5 if direction == 's'
+    return @location[0] < 5 if direction == 'e'
+    return @location[0] > -5 if direction == 'w'
   end
 
   def error
     "Invalid instruction."
+  end
+
+  def grab
+    "Grabbing crate."
   end
 end

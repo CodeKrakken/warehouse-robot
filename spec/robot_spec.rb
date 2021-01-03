@@ -40,5 +40,9 @@ describe Robot do
     expect(subject.instruct('s')).to eq "Invalid instruction."
   end
 
+  it 'responds to Grab instruction' do
+    expect(subject.instruct('g')).to eq "Grabbing crate."
+  end
+
 end
 

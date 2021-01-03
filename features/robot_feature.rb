@@ -1,7 +1,8 @@
 require './lib/robot'
 require './lib/warehouse'
 require './lib/crate'
-robot = Robot.new(Warehouse)
+warehouse = Warehouse.new
+robot = Robot.new(warehouse)
 robot
 robot.location
 robot.instruct('e')
@@ -18,5 +19,5 @@ robot.instruct('s')
 robot.location
 robot.instruct('g')
 crate = Crate.new(0,0)
-robot.warehouse.receive(crate)
+warehouse.receive(crate)
 robot.instruct('g')

@@ -53,7 +53,7 @@ describe Robot do
     it 'can tell if no crate is present' do
       allow(subject.warehouse).to receive(:crates)
       allow(subject.warehouse.crates).to receive(:length)
-      allow(subject.warehouse).to receive(:>)
+      allow(subject.warehouse.crates.length).to receive(:>)
       expect(subject.instruct('g')).to eq "No crate to grab."
     end
   end

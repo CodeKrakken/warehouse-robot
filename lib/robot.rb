@@ -3,8 +3,8 @@ class Robot
   attr_reader :location
   attr_reader :warehouse
 
-  def initialize(warehouse_class)
-    @warehouse = warehouse_class.new
+  def initialize(warehouse)
+    @warehouse = warehouse
     @location = [0,0]
   end
 

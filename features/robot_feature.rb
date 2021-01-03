@@ -18,6 +18,10 @@ robot.location
 robot.instruct('s')
 robot.location
 robot.instruct('g')
-crate = Crate.new(0,0)
+crate = Crate.new(1,1)
 warehouse.receive(crate)
+robot.instruct('g')
+robot.instruct('e')
+6.times { robot.instruct('n') }
+robot.location
 robot.instruct('g')

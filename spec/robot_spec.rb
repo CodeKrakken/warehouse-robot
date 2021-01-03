@@ -4,12 +4,12 @@ describe Robot do
 
   context 'using a warehouse double' do
 
-    let(:warehouse_class) { double :warehouse_class }
-    subject(:robot) { described_class.new(warehouse_class) }
+    let(:warehouse) { double :warehouse }
+    subject(:robot) { described_class.new(warehouse) }
 
     before(:each) do
-      allow(warehouse_class).to receive(:crates).and_return(:false)
-      allow(warehouse_class).to receive(:new)
+      allow(warehouse).to receive(:crates).and_return(:false)
+      allow(warehouse).to receive(:new)
     end
 
     it 'has a location' do
@@ -50,12 +50,15 @@ describe Robot do
       expect(subject.instruct('s')).to eq "Invalid instruction."
     end
 
-    it 'can tell if no crate is present' do
+    it 'will not grab if no crate is present in warehouse' do
       allow(subject.warehouse).to receive(:crates)
       allow(subject.warehouse.crates).to receive(:length)
       allow(subject.warehouse.crates.length).to receive(:>)
       expect(subject.instruct('g')).to eq "No crate to grab."
     end
+
+
+
   end
 end
 

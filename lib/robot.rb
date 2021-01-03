@@ -52,7 +52,7 @@ class Robot
   end
 
   def grab
-    crate? ? "Grabbing crate." : "No crate to grab."
+    crate? ? "Grabbed crate." : "No crate to grab."
   end
 
   def crate?

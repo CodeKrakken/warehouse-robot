@@ -57,6 +57,10 @@ describe Robot do
       expect(subject.instruct('g')).to eq "No crate to grab."
     end
 
+    it 'will grab a crate if present in warehouse' do
+      expect(subject.instruct('g')).to eq "Grabbed crate."
+    end
+
 
 
   end

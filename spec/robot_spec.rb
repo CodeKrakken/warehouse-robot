@@ -8,8 +8,9 @@ describe Robot do
     subject(:robot) { described_class.new(warehouse) }
 
     before(:each) do
-      allow(warehouse).to receive(:crates).and_return(:false)
       allow(warehouse).to receive(:new)
+      allow(warehouse).to receive(:crates)
+      allow(warehouse.crates).to receive(:length)
     end
 
     it 'has a location' do
@@ -51,17 +52,19 @@ describe Robot do
     end
 
     it 'will not grab if no crate is present in warehouse' do
-      allow(subject.warehouse).to receive(:crates)
-      allow(subject.warehouse.crates).to receive(:length)
-      allow(subject.warehouse.crates.length).to receive(:>)
+      allow(warehouse.crates.length).to receive(:>)
       expect(subject.instruct('g')).to eq "No crate to grab."
     end
 
     it 'will grab a crate if present in warehouse' do
+      allow(warehouse.crates.length).to receive(:>).and_return(true)
       expect(subject.instruct('g')).to eq "Grabbed crate."
     end
 
-
+    it 'will not grab a crate if none present at robot location' do
+      allow(warehouse.crates.length).to receive(:>)
+      expect(subject.instruct('g')).to eq "No crate to grab."
+    end
 
   end
 end

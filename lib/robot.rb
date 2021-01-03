@@ -2,7 +2,8 @@ class Robot
 
   attr_reader :location
 
-  def initialize
+  def initialize(warehouse_class)
+    @warehouse = warehouse_class.new
     @location = [0,0]
   end
 
@@ -50,6 +51,10 @@ class Robot
   end
 
   def grab
-    "Grabbing crate."
+    crate? ? "Grabbing crate." : "No crate to grab."
+  end
+
+  def crate?
+    @warehouse.crates.length >= 1
   end
 end

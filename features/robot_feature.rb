@@ -1,5 +1,6 @@
 require './lib/robot'
-robot = Robot.new
+require './lib/warehouse'
+robot = Robot.new(Warehouse)
 robot
 robot.location
 robot.instruct('e')

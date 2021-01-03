@@ -14,4 +14,4 @@ robot.instruct('n')
 robot.location
 robot.instruct('s')
 robot.location
-robot.grab
+robot.instruct('g')

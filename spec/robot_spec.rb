@@ -1,5 +1,4 @@
 require 'robot'
-require 'warehouse'
 
 describe Robot do
 
@@ -9,7 +8,7 @@ describe Robot do
     subject(:robot) { described_class.new(warehouse_class) }
 
     before(:each) do
-      allow(warehouse_class).to receive(:crates)
+      allow(warehouse_class).to receive(:crates).and_return(:false)
       allow(warehouse_class).to receive(:new)
     end
 
@@ -50,15 +49,13 @@ describe Robot do
       5.times { subject.instruct('s') }
       expect(subject.instruct('s')).to eq "Invalid instruction."
     end
-  end
-
-  context 'using a real Warehouse' do
-    subject(:robot) { described_class.new(Warehouse) }
 
     it 'can tell if no crate is present' do
+      allow(subject.warehouse).to receive(:crates)
+      allow(subject.warehouse.crates).to receive(:length)
+      allow(subject.warehouse).to receive(:>)
       expect(subject.instruct('g')).to eq "No crate to grab."
     end
   end
-
 end
 

@@ -1,6 +1,7 @@
 class Robot
 
   attr_reader :location
+  attr_reader :warehouse
 
   def initialize(warehouse_class)
     @warehouse = warehouse_class.new
@@ -55,6 +56,6 @@ class Robot
   end
 
   def crate?
-    @warehouse.crates.length >= 1
+    @warehouse.crates.length > 0
   end
 end

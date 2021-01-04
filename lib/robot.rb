@@ -2,12 +2,11 @@ class Robot
 
   attr_reader :location
   attr_reader :warehouse
-  attr_reader :crate
+  attr_accessor :crate
 
   def initialize(warehouse)
     @warehouse = warehouse
     @location = [0,0]
-    @crate = ''
   end
 
   def instruct(instruction)
@@ -55,9 +54,10 @@ class Robot
 
   def grab
     warehouse.crates.each do |crate|
+      puts 'here'
       if crate.location == @location
         @crate = crate
-        return "Grabbed crate."
+        return @crate
       else
         
         return "No crate to grab."

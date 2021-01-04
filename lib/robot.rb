@@ -59,6 +59,7 @@ class Robot
         @crate = crate
         return "Grabbed crate."
       else
+        
         return "No crate to grab."
       end
     end

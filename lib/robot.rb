@@ -26,7 +26,7 @@ class Robot
     
   end
 
-  private
+  # private
 
   def move(direction)
     if allowed?(direction)
@@ -52,10 +52,13 @@ class Robot
   end
 
   def grab
-    crate? ? "Grabbed crate." : "No crate to grab."
+    warehouse.crates.each do |crate|
+      if crate.location == @location
+        return "Grabbed crate."
+      else
+        return "No crate to grab."
+      end
+    end
   end
 
-  def crate?
-    @warehouse.crates.length > 0
-  end
 end

@@ -53,13 +53,17 @@ class Robot
   end
 
   def grab
-    warehouse.crates.each do |crate|
-      if crate.location == @location
-        warehouse.crates.delete(crate)
-        @crate = crate
-        return @crate
-      else
-        return "No crate to grab."
+    if @crate
+      'Already holding crate.'
+    else
+      warehouse.crates.each do |crate|
+        if crate.location == @location
+          warehouse.crates.delete(crate)
+          @crate = crate
+          return @crate
+        else
+          return "No crate to grab."
+        end
       end
     end
   end

@@ -4,6 +4,7 @@ describe Robot do
 
   let(:warehouse) { double :warehouse }
   let(:crate) { double :crate }
+  let(:crate_2) { double :crate }
   subject(:robot) { described_class.new(warehouse) }
 
   before(:each) do
@@ -67,5 +68,14 @@ describe Robot do
     allow(crate).to receive(:location).and_return([0,0])
     subject.instruct('g')
     expect(warehouse.crates).to have_received(:delete)
+  end
+
+  it 'will not grab if holding a crate already' do
+    allow(warehouse).to receive(:crates).and_return([crate, crate_2])
+    allow(crate).to receive(:location).and_return([0,0])
+    subject.instruct('g')
+    allow(crate).to receive(:location).and_return([0,1])
+    subject.instruct('n')
+    expect(subject.instruct('g')).to eq 'Already holding crate.'
   end
 end

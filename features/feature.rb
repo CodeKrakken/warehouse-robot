@@ -45,6 +45,7 @@ robot.location
 
 warehouse.crates
 warehouse.receive(crate)
+warehouse.receive(crate_2)
 warehouse.crates
 robot.instruct('g')
 5.times { robot.instruct('e') }
@@ -54,3 +55,9 @@ warehouse.crates
 robot.instruct('g')
 robot.crate
 warehouse.crates
+5.times { robot.instruct('s') }
+5.times { robot.instruct('w') }
+robot.location
+crate_2.location
+robot.crate
+robot.instruct('g')

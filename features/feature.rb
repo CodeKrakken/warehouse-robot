@@ -8,7 +8,7 @@ require './lib/crate'
 
 warehouse = Warehouse.new
 robot = Robot.new(warehouse)
-crate = Crate.new(1, 1)
+crate = Crate.new(5, 5)
 crate_2 = Crate.new(0, 0)
 
 # display instances and attributes
@@ -40,14 +40,17 @@ robot.instruct('n')
 robot.location
 robot.instruct('s')
 robot.location
-robot.instruct('g')
 
 # robot grab function
 
+warehouse.crates
 warehouse.receive(crate)
+warehouse.crates
 robot.instruct('g')
-robot.instruct('e')
-6.times { robot.instruct('n') }
+5.times { robot.instruct('e') }
+10.times { robot.instruct('n') }
 robot.location
+warehouse.crates
 robot.instruct('g')
 robot.crate
+warehouse.crates

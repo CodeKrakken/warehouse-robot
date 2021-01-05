@@ -57,10 +57,14 @@ describe Robot do
   end
 
   it 'holds a crate once grabbed' do
-    allow(crate).to receive(:location).and_return([0,0])
     allow(warehouse.crates).to receive(:each).and_return(crate)
     expect(subject.instruct('g')).to eq (crate)
   end
 
+  it 'removes crate from warehouse inventory once grabbed' do
+    allow(warehouse.crates).to receive(:each).and_return(crate)
+    allow(warehouse.crates).to receive(:delete)
+    subject.instruct('g')
+    expect(warehouse.crates).to have_received(:delete)
+  end
 end
-

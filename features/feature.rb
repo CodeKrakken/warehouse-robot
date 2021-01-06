@@ -61,3 +61,7 @@ robot.location
 crate_2.location
 robot.crate
 robot.instruct('g')
+
+# robot drop function
+
+robot.instruct('d')

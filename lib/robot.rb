@@ -21,6 +21,8 @@ class Robot
       move('w')
     when 'g'
       grab
+    when 'd'
+      drop
     else
       error
     end
@@ -67,4 +69,10 @@ class Robot
       end
     end
   end
+
+  def drop
+    'Dropped crate gently.'
+  end
+
+
 end

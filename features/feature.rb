@@ -68,3 +68,4 @@ robot.crate
 robot.instruct('d')
 robot.crate
 warehouse.crates
+robot.instruct('d')

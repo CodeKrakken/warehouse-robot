@@ -71,9 +71,13 @@ class Robot
   end
 
   def drop
-    warehouse.crates.push(@crate)
-    @crate = nil
-    'Dropped crate gently.'
+    if @crate
+      warehouse.crates.push(@crate)
+      @crate = nil
+      'Dropped crate gently.'
+    else
+      'No crate to drop.'
+    end
   end
 
 

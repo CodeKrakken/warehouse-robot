@@ -102,4 +102,9 @@ describe Robot do
     subject.instruct('d')
     expect(warehouse.crates).to have_received(:push)
   end
+
+  it 'will not drop a crate when not holding one' do
+    allow(warehouse.crates).to receive(:push)
+    expect(subject.instruct('d')).to eq 'No crate to drop.'
+  end
 end

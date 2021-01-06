@@ -43,12 +43,22 @@ describe Robot do
 
   it 'will not move outside warehouse north wall' do
     5.times { subject.instruct('n') }
-    expect(subject.instruct('n')).to eq "Invalid instruction."
+    expect(subject.instruct('n')).to eq "Cannot move there."
   end
 
   it 'will not move outside warehouse south wall' do
     5.times { subject.instruct('s') }
-    expect(subject.instruct('s')).to eq "Invalid instruction."
+    expect(subject.instruct('s')).to eq "Cannot move there."
+  end
+
+  it 'will not move outside warehouse east wall' do
+    5.times { subject.instruct('e') }
+    expect(subject.instruct('e')).to eq "Cannot move there."
+  end
+
+  it 'will not move outside warehouse west wall' do
+    5.times { subject.instruct('w') }
+    expect(subject.instruct('w')).to eq "Cannot move there."
   end
 
   it 'will not grab a crate if none present at robot location' do
@@ -82,6 +92,7 @@ describe Robot do
   it 'will return Dropped Crate message when instructed' do
     allow(warehouse).to receive(:crates).and_return([crate, crate_2])
     allow(crate).to receive(:location).and_return([0,0])
+    allow(crate_2).to receive(:location).and_return([0,0])
     subject.instruct('g')
     expect(subject.instruct('d')).to eq 'Dropped crate gently.'  
   end
@@ -89,6 +100,7 @@ describe Robot do
   it 'will drop the crate it is holding when instructed' do
     allow(warehouse).to receive(:crates).and_return([crate, crate_2])
     allow(crate).to receive(:location).and_return([0,0])
+    allow(crate_2).to receive(:location).and_return([0,0])
     subject.instruct('g')
     subject.instruct('d')
     expect(subject.crate).to eq nil
@@ -97,6 +109,7 @@ describe Robot do
   it 'returns crate to warehouse inventory when dropped' do
     allow(warehouse).to receive(:crates).and_return([crate, crate_2])
     allow(crate).to receive(:location).and_return([0,0])
+    allow(crate_2).to receive(:location).and_return([0,0])
     allow(warehouse.crates).to receive(:push)
     subject.instruct('g')
     subject.instruct('d')
@@ -106,5 +119,13 @@ describe Robot do
   it 'will not drop a crate when not holding one' do
     allow(warehouse.crates).to receive(:push)
     expect(subject.instruct('d')).to eq 'No crate to drop.'
+  end
+
+  it 'will not drop crate on another crate' do
+    allow(warehouse).to receive(:crates).and_return([crate, crate_2])
+    allow(crate).to receive(:location).and_return([0,0])
+    allow(crate_2).to receive(:location).and_return([0,0])
+    subject.instruct('g')
+    expect(subject.instruct('d')).to eq 'Cannot drop crate here.'
   end
 end

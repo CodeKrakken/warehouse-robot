@@ -15,10 +15,7 @@ crate_2 = Crate.new(0, 0)
 
 crate
 crate_2
-crate.location
-crate_2.location
 robot
-robot.location
 
 # move robot
 
@@ -36,17 +33,29 @@ robot.instruct('b')
 5.times { robot.instruct('n') }
 robot.location
 robot.instruct('n')
+robot.location
 10.times { robot.instruct('s') }
 robot.location
 robot.instruct('s')
 robot.location
+5.times { robot.instruct('w') }
+robot.location
+robot.instruct('w')
+robot.location
+10.times { robot.instruct('e') }
+robot.location
+robot.instruct('e')
+robot.location
 
-# robot grab function
+# warehouse receive crates
 
 warehouse.crates
 warehouse.receive(crate)
 warehouse.receive(crate_2)
 warehouse.crates
+
+# robot grab function
+
 robot.instruct('g')
 5.times { robot.instruct('e') }
 10.times { robot.instruct('n') }

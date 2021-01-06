@@ -39,7 +39,7 @@ class Robot
       @location[1] -= 1 if direction == 's'
       @location
     else
-      error
+      'Cannot move there.'
     end
   end
 
@@ -71,14 +71,21 @@ class Robot
   end
 
   def drop
-    if @crate
+    if !@crate
+      return 'No crate to drop.'
+    elsif !space_is_clear
+      return 'Cannot drop crate here.'
+    else
       warehouse.crates.push(@crate)
       @crate = nil
-      'Dropped crate gently.'
-    else
-      'No crate to drop.'
+      return 'Dropped crate gently.'      
     end
   end
 
+  def space_is_clear
+    warehouse.crates.each do |crate|
+      crate.location != @location
+    end
+  end
 
 end

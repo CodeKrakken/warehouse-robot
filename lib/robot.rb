@@ -71,20 +71,16 @@ class Robot
   end
 
   def drop
-    if !@crate
-      return 'No crate to drop.'
-    elsif !space_is_clear
-      return 'Cannot drop crate here.'
-    else
-      warehouse.crates.push(@crate)
-      @crate = nil
-      return 'Dropped crate gently.'      
-    end
+    return 'No crate to drop.' if !@crate
+    return 'Cannot drop crate here.' if check_space == true
+    warehouse.crates.push(@crate)
+    @crate = nil
+    return 'Dropped crate gently.'
   end
 
-  def space_is_clear
+  def check_space
     warehouse.crates.each do |crate|
-      crate.location != @location
+      return true if crate.location == @location
     end
   end
 

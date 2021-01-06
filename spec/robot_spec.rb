@@ -92,15 +92,16 @@ describe Robot do
   it 'will return Dropped Crate message when instructed' do
     allow(warehouse).to receive(:crates).and_return([crate, crate_2])
     allow(crate).to receive(:location).and_return([0,0])
-    allow(crate_2).to receive(:location).and_return([0,0])
+    allow(crate_2).to receive(:location).and_return([5,5])
     subject.instruct('g')
+    # binding.pry
     expect(subject.instruct('d')).to eq 'Dropped crate gently.'  
   end
 
   it 'will drop the crate it is holding when instructed' do
     allow(warehouse).to receive(:crates).and_return([crate, crate_2])
     allow(crate).to receive(:location).and_return([0,0])
-    allow(crate_2).to receive(:location).and_return([0,0])
+    allow(crate_2).to receive(:location).and_return([5,5])
     subject.instruct('g')
     subject.instruct('d')
     expect(subject.crate).to eq nil
@@ -109,7 +110,7 @@ describe Robot do
   it 'returns crate to warehouse inventory when dropped' do
     allow(warehouse).to receive(:crates).and_return([crate, crate_2])
     allow(crate).to receive(:location).and_return([0,0])
-    allow(crate_2).to receive(:location).and_return([0,0])
+    allow(crate_2).to receive(:location).and_return([5,5])
     allow(warehouse.crates).to receive(:push)
     subject.instruct('g')
     subject.instruct('d')
@@ -126,6 +127,7 @@ describe Robot do
     allow(crate).to receive(:location).and_return([0,0])
     allow(crate_2).to receive(:location).and_return([0,0])
     subject.instruct('g')
+    # binding.pry
     expect(subject.instruct('d')).to eq 'Cannot drop crate here.'
   end
 end

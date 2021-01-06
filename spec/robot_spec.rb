@@ -93,4 +93,13 @@ describe Robot do
     subject.instruct('d')
     expect(subject.crate).to eq nil
   end
+
+  it 'returns crate to warehouse inventory when dropped' do
+    allow(warehouse).to receive(:crates).and_return([crate, crate_2])
+    allow(crate).to receive(:location).and_return([0,0])
+    allow(warehouse.crates).to receive(:push)
+    subject.instruct('g')
+    subject.instruct('d')
+    expect(warehouse.crates).to have_received(:push)
+  end
 end

@@ -71,6 +71,7 @@ class Robot
   end
 
   def drop
+    warehouse.crates.push(@crate)
     @crate = nil
     'Dropped crate gently.'
   end

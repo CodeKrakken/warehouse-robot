@@ -29,7 +29,7 @@ class Robot
     
   end
 
-  # private
+  private
 
   def move(direction)
     if allowed?(direction)

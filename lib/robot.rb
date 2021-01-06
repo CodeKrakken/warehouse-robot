@@ -71,6 +71,7 @@ class Robot
   end
 
   def drop
+    @crate = nil
     'Dropped crate gently.'
   end
 

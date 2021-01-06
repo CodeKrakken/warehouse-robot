@@ -64,4 +64,6 @@ robot.instruct('g')
 
 # robot drop function
 
+robot.crate
 robot.instruct('d')
+robot.crate

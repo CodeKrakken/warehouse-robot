@@ -79,10 +79,18 @@ describe Robot do
     expect(subject.instruct('g')).to eq 'Already holding crate.'
   end
 
-  it 'will drop a crate when instructed' do
+  it 'will return Dropped Crate message when instructed' do
     allow(warehouse).to receive(:crates).and_return([crate, crate_2])
     allow(crate).to receive(:location).and_return([0,0])
     subject.instruct('g')
     expect(subject.instruct('d')).to eq 'Dropped crate gently.'  
+  end
+
+  it 'will drop the crate it is holding when instructed' do
+    allow(warehouse).to receive(:crates).and_return([crate, crate_2])
+    allow(crate).to receive(:location).and_return([0,0])
+    subject.instruct('g')
+    subject.instruct('d')
+    expect(subject.crate).to eq nil
   end
 end

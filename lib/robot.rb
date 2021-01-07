@@ -3,6 +3,7 @@ class Robot
   attr_reader :location
   attr_reader :warehouse
   attr_reader :crate
+  attr_reader :crate_to_grab
 
   def initialize(warehouse)
     @warehouse = warehouse
@@ -58,14 +59,12 @@ class Robot
     if @crate
       'Already holding crate.'
     else
-      warehouse.crates.each do |crate|
-        if crate.location == @location
-          warehouse.crates.delete(crate)
-          @crate = crate
-          return @crate
-        else
-          return "No crate to grab."
-        end
+      @crate = @warehouse.crates.find {|crate| crate.location == @location }
+      unless !@crate
+        warehouse.crates.delete(@crate)
+        return @crate
+      else
+        "No crate to grab."
       end
     end
   end

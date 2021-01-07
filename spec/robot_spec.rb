@@ -64,11 +64,13 @@ describe Robot do
   it 'will not grab a crate if none present at robot location' do
     allow(warehouse.crates.length).to receive(:>).and_return(true)
     allow(warehouse.crates).to receive(:each).and_return('No crate to grab.')
+    allow(warehouse.crates).to receive(:find)
     expect(subject.instruct('g')).to eq "No crate to grab."
   end
 
   it 'holds a crate once grabbed' do
-    allow(warehouse.crates).to receive(:each).and_return(crate)
+    allow(warehouse.crates).to receive(:find).and_return(crate)
+    allow(warehouse.crates).to receive(:delete)
     expect(subject.instruct('g')).to eq (crate)
   end
 

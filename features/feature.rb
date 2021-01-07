@@ -8,10 +8,10 @@ require './lib/crate'
 
 warehouse = Warehouse.new
 robot = Robot.new(warehouse)
-crate = Crate.new(5, 5)
-crate_2 = Crate.new(0, 0)
+crate = Crate.new(0, 0)
+crate_2 = Crate.new(5, 5)
 
-# display instances and attributes
+# display instances
 
 crate
 crate_2

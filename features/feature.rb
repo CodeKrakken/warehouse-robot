@@ -52,6 +52,7 @@ robot.location
 warehouse.crates
 warehouse.receive(crate)
 warehouse.receive(crate_2)
+warehouse.receive(crate_2)
 warehouse.crates
 
 # robot grab function

@@ -19,4 +19,9 @@ describe Warehouse do
   it 'can receive crates' do
     expect(subject.receive(crate)).to eq [crate]
   end
+
+  it 'will not receive a crate if already in crates array' do
+    subject.receive(crate)
+    expect(subject.receive(crate)).to eq 'Crate already in warehouse.'
+  end
 end

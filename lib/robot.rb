@@ -3,7 +3,6 @@ class Robot
   attr_reader :location
   attr_reader :warehouse
   attr_reader :crate
-  attr_reader :crate_to_grab
 
   def initialize(warehouse)
     @warehouse = warehouse

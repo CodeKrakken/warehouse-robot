@@ -5,4 +5,8 @@ class Crate
   def initialize(x, y)
     @location = [x, y]
   end
+
+  def update(location)
+    @location = location
+  end
 end

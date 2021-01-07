@@ -72,6 +72,7 @@ class Robot
   def drop
     return 'No crate to drop.' if !@crate
     return 'Cannot drop crate here.' if check_space == true
+    @crate.update(@location)
     warehouse.crates.push(@crate)
     @crate = nil
     return 'Dropped crate gently.'

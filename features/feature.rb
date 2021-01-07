@@ -78,3 +78,4 @@ robot.instruct('d')
 robot.crate
 robot.instruct('n')
 robot.instruct('d')
+crate_2.location

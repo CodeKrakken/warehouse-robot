@@ -138,7 +138,7 @@ describe Robot do
       end
 
       it 'will drop the crate it is holding when instructed' do
-        expect(subject.crate).to eq nil # testing state - change
+        expect(subject.instruct('d')).to change(subject.crate).from(crate).to(NilClass)
       end
   
       it 'returns crate to warehouse inventory when dropped' do

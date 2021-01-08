@@ -11,6 +11,8 @@ describe Robot do
     allow(warehouse).to receive(:new)
     allow(warehouse).to receive(:crates)
     allow(warehouse.crates).to receive(:length)
+    allow(warehouse).to receive(:check)
+    allow(crate).to receive(:update)
   end
 
   it 'has a location' do
@@ -130,8 +132,11 @@ describe Robot do
   it 'will not drop crate on another crate' do
     allow(warehouse).to receive(:crates).and_return([crate, crate_2])
     allow(crate).to receive(:location).and_return([0,0])
-    allow(crate_2).to receive(:location).and_return([0,0])
+    allow(crate_2).to receive(:location).and_return([0,1])
+    # binding.pry
     subject.instruct('g')
+    subject.instruct('n')
+    allow(warehouse).to receive(:check).and_return(true)
     expect(subject.instruct('d')).to eq 'Cannot drop crate here.'
   end
 

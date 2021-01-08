@@ -10,7 +10,14 @@ class Warehouse
 
   def receive(crate)
     return 'Crate already in warehouse.' if @crates.include?(crate)
+    return 'Position occupied.' if check(crate.location) == true
     @crates.push(crate)
+  end
+
+  def check(location)
+    crates.each do |crate|
+      return true if crate.location == location
+    end
   end
 
 end

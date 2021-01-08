@@ -8,7 +8,7 @@ require './lib/crate'
 
 warehouse = Warehouse.new
 robot = Robot.new(warehouse)
-crate = Crate.new(0, 0)
+crate = Crate.new(1, 1)
 crate_2 = Crate.new(5, 5)
 crate_3 = Crate.new(5, 5)
 
@@ -52,10 +52,10 @@ robot.location
 # warehouse receive crates
 
 warehouse.crates
-warehouse.receive(crate)
-warehouse.receive(crate_2)
-warehouse.receive(crate_2)
-warehouse.receive(crate_3)
+warehouse.receive(crate, 0, 0)
+warehouse.receive(crate_2, 5, 5)
+warehouse.receive(crate_2, 5, 5)
+warehouse.receive(crate_3, 5, 5)
 warehouse.crates
 
 # robot grab function

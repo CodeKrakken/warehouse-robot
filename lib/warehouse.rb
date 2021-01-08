@@ -8,9 +8,10 @@ class Warehouse
     @crates = []
   end
 
-  def receive(crate)
+  def receive(crate, x, y)
     return 'Crate already in warehouse.' if @crates.include?(crate)
     return 'Position occupied.' if check(crate.location) == true
+    crate.update([x, y])
     @crates.push(crate)
   end
 

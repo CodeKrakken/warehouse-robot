@@ -4,7 +4,6 @@ describe Robot do
 
   let(:warehouse) { double :warehouse }
   let(:crate) { double :crate }
-  let(:crate_2) { double :crate }
   subject(:robot) { described_class.new(warehouse) }
 
   before(:each) do
@@ -17,7 +16,7 @@ describe Robot do
     expect(subject).to respond_to :location
   end
 
-  it 'responds to e' do
+  it 'responds to instruct' do
     expect(subject).to respond_to :instruct
   end
 
@@ -77,68 +76,74 @@ describe Robot do
     expect(subject.instruct('w')).to eq "Cannot move there."
   end
 
-  it 'will not grab a crate if none present at robot location' do
-    allow(warehouse.crates).to receive(:find)
-    expect(subject.instruct('g')).to eq "No crate to grab."
+  context 'when holding nothing' do
+
+    before :each do
+      expect(subject.crate).to eq nil
+    end
+
+    it 'holds a crate once grabbed' do
+      allow(warehouse.crates).to receive(:find).and_return(crate)
+      expect(subject.instruct('g')).to eq crate
+    end
+  
+    it 'removes crate from warehouse inventory once grabbed' do
+      allow(warehouse.crates).to receive(:delete)
+      subject.instruct('g')
+      expect(warehouse.crates).to have_received(:delete)
+    end
+  
+    it 'will not drop a crate when not holding one' do
+      expect(subject.instruct('d')).to eq 'No crate to drop.'
+    end
+
+    it 'will not grab a crate if none present at robot location' do
+      allow(warehouse.crates).to receive(:find)
+      expect(subject.instruct('g')).to eq "No crate to grab."
+    end
   end
 
-  it 'holds a crate once grabbed' do
-    allow(warehouse.crates).to receive(:find).and_return(crate)
-    expect(subject.instruct('g')).to eq (crate)
-  end
+  context 'when holding a crate' do
+    
+    before(:each) do
+      subject.instruct('g')
+      expect(subject.crate).to eq crate
+      allow(crate).to receive(:update)
+      allow(warehouse.crates).to receive(:push)
+    end
 
-  it 'removes crate from warehouse inventory once grabbed' do
-    allow(warehouse.crates).to receive(:delete)
-    subject.instruct('g')
-    expect(warehouse.crates).to have_received(:delete)
-  end
+    it 'will not grab if holding a crate already' do
+      expect(subject.instruct('g')).to eq 'Already holding crate.'
+    end
 
-  it 'will not grab if holding a crate already' do
-    subject.instruct('g')
-    expect(subject.instruct('g')).to eq 'Already holding crate.'
-  end
+    it 'will return Dropped Crate message when instructed' do
+      expect(subject.instruct('d')).to eq 'Dropped crate gently.'   
+    end
 
-  it 'will return Dropped Crate message when instructed' do
-    allow(crate).to receive(:update)
-    subject.instruct('g')
-    expect(subject.instruct('d')).to eq 'Dropped crate gently.'   
-  end
+    it 'will not drop crate on another crate' do
+      allow(warehouse).to receive(:check).and_return(true)
+      expect(subject.instruct('d')).to eq 'Cannot drop crate here.'
+    end
 
-  it 'will drop the crate it is holding when instructed' do
-    allow(crate).to receive(:update)
-    subject.instruct('g')
-    expect(subject.crate).to eq crate
-    subject.instruct('d')
-    expect(subject.crate).to eq nil
-  end
+    it 'updates crate location upon drop' do
+      subject.instruct('n')
+      subject.instruct('d')
+      expect(crate).to have_received(:update).with([0,1])
+    end
 
-  it 'returns crate to warehouse inventory when dropped' do
-    allow(warehouse.crates).to receive(:push)
-    allow(crate).to receive(:update)
-    subject.instruct('g')
-    expect(subject.crate).to eq crate
-    subject.instruct('d')
-    expect(warehouse.crates).to have_received(:push)
-  end
+    context 'dropping a crate' do
 
-  it 'will not drop a crate when not holding one' do
-    expect(subject.crate).to eq nil
-    expect(subject.instruct('d')).to eq 'No crate to drop.'
-  end
+      before(:each) do
+        subject.instruct('d')
+      end
 
-  it 'will not drop crate on another crate' do
-    subject.instruct('g')
-    expect(subject.crate).to eq crate
-    allow(warehouse).to receive(:check).and_return(true)
-    expect(subject.instruct('d')).to eq 'Cannot drop crate here.'
-  end
-
-  it 'updates crate location upon drop' do
-    allow(warehouse).to receive(:crates).and_return([crate])
-    allow(crate).to receive(:location).and_return([0,0])
-    subject.instruct('g')
-    subject.instruct('n')
-    allow(crate).to receive(:update)
-    subject.instruct('d')
+      it 'will drop the crate it is holding when instructed' do
+        expect(subject.crate).to eq nil # testing state - change
+      end
+  
+      it 'returns crate to warehouse inventory when dropped' do
+        expect(warehouse.crates).to have_received(:push)
+      end
+    end    
   end
 end

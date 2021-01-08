@@ -8,11 +8,8 @@ describe Robot do
   subject(:robot) { described_class.new(warehouse) }
 
   before(:each) do
-    allow(warehouse).to receive(:new)
-    allow(warehouse).to receive(:crates)
-    allow(warehouse.crates).to receive(:length)
+    allow(warehouse).to receive(:crates).and_return([crate])
     allow(warehouse).to receive(:check)
-    allow(crate).to receive(:update)
   end
 
   it 'has a location' do
@@ -80,8 +77,6 @@ describe Robot do
   end
 
   it 'will not grab a crate if none present at robot location' do
-    allow(warehouse.crates.length).to receive(:>).and_return(true)
-    allow(warehouse.crates).to receive(:each).and_return('No crate to grab.')
     allow(warehouse.crates).to receive(:find)
     expect(subject.instruct('g')).to eq "No crate to grab."
   end
@@ -101,11 +96,8 @@ describe Robot do
   end
 
   it 'will not grab if holding a crate already' do
-    allow(warehouse).to receive(:crates).and_return([crate, crate_2])
     allow(crate).to receive(:location).and_return([0,0])
     subject.instruct('g')
-    allow(crate).to receive(:location).and_return([0,1])
-    subject.instruct('n')
     expect(subject.instruct('g')).to eq 'Already holding crate.'
   end
 

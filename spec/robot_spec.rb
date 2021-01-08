@@ -105,29 +105,24 @@ describe Robot do
   end
 
   it 'will drop the crate it is holding when instructed' do
-    # allow(warehouse).to receive(:crates).and_return([crate, crate_2])
-    # allow(crate).to receive(:location).and_return([0,0])
-    # allow(crate_2).to receive(:location).and_return([5,5])
     allow(crate).to receive(:update)
     subject.instruct('g')
-    expect(subject.crate).to eq (crate)
+    expect(subject.crate).to eq crate
     subject.instruct('d')
     expect(subject.crate).to eq nil
   end
 
   it 'returns crate to warehouse inventory when dropped' do
-    allow(warehouse).to receive(:crates).and_return([crate, crate_2])
-    allow(crate).to receive(:location).and_return([0,0])
-    allow(crate_2).to receive(:location).and_return([5,5])
     allow(warehouse.crates).to receive(:push)
     allow(crate).to receive(:update)
     subject.instruct('g')
+    expect(subject.crate).to eq crate
     subject.instruct('d')
     expect(warehouse.crates).to have_received(:push)
   end
 
   it 'will not drop a crate when not holding one' do
-    allow(warehouse.crates).to receive(:push)
+    expect(subject.crate).to eq nil
     expect(subject.instruct('d')).to eq 'No crate to drop.'
   end
 

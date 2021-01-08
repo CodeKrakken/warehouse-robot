@@ -51,9 +51,9 @@ describe Robot do
     expect(subject.instruct('nw')).to eq [-1, 1]
   end
 
-  # it 'moves one space southeast when se is called' do
-  #   expect(subject.instruct('se')).to eq [1, -1]
-  # end
+  it 'moves one space southeast when se is called' do
+    expect(subject.instruct('se')).to eq [1, -1]
+  end
   
   it 'does not respond to incorrect instructions' do
     expect(subject.instruct('b')).to eq "Invalid instruction."

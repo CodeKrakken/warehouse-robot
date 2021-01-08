@@ -41,6 +41,7 @@ describe Warehouse do
     allow(crate).to receive(:location).and_return([0, 0])
     allow(crate_2).to receive(:location).and_return([0, 0])
     allow(crate).to receive(:update)
+    allow(crate_2).to receive(:update)
     subject.receive(crate, 0, 0)
     expect(subject.receive(crate_2, 0, 0)).to eq 'Position occupied.'
   end

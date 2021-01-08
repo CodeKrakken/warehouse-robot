@@ -10,6 +10,7 @@ describe Robot do
   before(:each) do
     allow(warehouse).to receive(:crates).and_return([crate])
     allow(warehouse).to receive(:check)
+    allow(crate).to receive(:location).and_return([0,0])
   end
 
   it 'has a location' do
@@ -83,20 +84,16 @@ describe Robot do
 
   it 'holds a crate once grabbed' do
     allow(warehouse.crates).to receive(:find).and_return(crate)
-    allow(warehouse.crates).to receive(:delete)
     expect(subject.instruct('g')).to eq (crate)
   end
 
   it 'removes crate from warehouse inventory once grabbed' do
-    allow(warehouse).to receive(:crates).and_return([crate])
     allow(warehouse.crates).to receive(:delete)
-    allow(crate).to receive(:location).and_return([0,0])
     subject.instruct('g')
     expect(warehouse.crates).to have_received(:delete)
   end
 
   it 'will not grab if holding a crate already' do
-    allow(crate).to receive(:location).and_return([0,0])
     subject.instruct('g')
     expect(subject.instruct('g')).to eq 'Already holding crate.'
   end

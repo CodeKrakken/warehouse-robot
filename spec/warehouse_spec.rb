@@ -6,7 +6,7 @@ describe Warehouse do
   let(:crate_2) { double :crate }
 
   before(:each) do
-    allow(crate).to receive(:location)
+    allow(crate).to receive(:location).and_return([0, 0])
     allow(crate).to receive(:update)
   end
 
@@ -37,7 +37,6 @@ describe Warehouse do
   end
 
   it 'will not receive a crate in same location as existing one' do
-    allow(crate).to receive(:location).and_return([0, 0])
     allow(crate_2).to receive(:location).and_return([0, 0])
     allow(crate_2).to receive(:update)
     subject.receive(crate, 0, 0)

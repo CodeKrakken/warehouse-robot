@@ -22,6 +22,9 @@ class Robot
     when 'ne'
       move('n')
       move('e')
+    when 'sw'
+      move('s')
+      move('w')
     when 'g'
       grab
     when 'd'

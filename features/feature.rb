@@ -26,9 +26,10 @@ robot.instruct('w')
 robot.instruct('n')
 robot.instruct('s')
 robot.instruct('ne')
+robot.instruct('sw')
 # robot.instruct('nw')
 # robot.instruct('se')
-# robot.instruct('sw')
+
 
 # edgecase
 

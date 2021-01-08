@@ -43,9 +43,9 @@ describe Robot do
     expect(subject.instruct('ne')).to eq [1, 1]
   end
 
-  # it 'moves one space northwest when nw is called' do
-  #   expect(subject.instruct('nw')).to eq [-1, 1]
-  # end
+  it 'moves one space southwest when sw is called' do
+    expect(subject.instruct('sw')).to eq [-1, -1]
+  end
 
   # it 'moves one space southeast when se is called' do
   #   expect(subject.instruct('se')).to eq [1, -1]

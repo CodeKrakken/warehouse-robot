@@ -127,12 +127,8 @@ describe Robot do
   end
 
   it 'will not drop crate on another crate' do
-    allow(warehouse).to receive(:crates).and_return([crate, crate_2])
-    allow(crate).to receive(:location).and_return([0,0])
-    allow(crate_2).to receive(:location).and_return([0,1])
-    # binding.pry
     subject.instruct('g')
-    subject.instruct('n')
+    expect(subject.crate).to eq crate
     allow(warehouse).to receive(:check).and_return(true)
     expect(subject.instruct('d')).to eq 'Cannot drop crate here.'
   end

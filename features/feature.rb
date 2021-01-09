@@ -38,20 +38,25 @@ robot.instruct('b')
 # boundary test
 
 5.times { robot.instruct('n') }
+5.times { robot.instruct('e') }
 robot.location
 robot.instruct('n')
+robot.instruct('ne')
+robot.instruct('e')
 robot.location
 10.times { robot.instruct('s') }
 robot.location
+robot.instruct('se')
 robot.instruct('s')
 robot.location
-5.times { robot.instruct('w') }
+10.times { robot.instruct('w') }
 robot.location
 robot.instruct('w')
+robot.instruct('sw')
 robot.location
-10.times { robot.instruct('e') }
+10.times { robot.instruct('n') }
 robot.location
-robot.instruct('e')
+robot.instruct('nw')
 robot.location
 
 # warehouse receive crates
@@ -66,8 +71,7 @@ warehouse.crates
 # robot grab function
 
 robot.instruct('g')
-5.times { robot.instruct('e') }
-10.times { robot.instruct('n') }
+10.times { robot.instruct('e') }
 robot.location
 warehouse.crates
 robot.instruct('g')

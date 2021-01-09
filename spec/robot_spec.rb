@@ -125,9 +125,8 @@ describe Robot do
       expect(subject.instruct('d')).to eq 'Cannot drop crate here.'
     end
 
-    it 'updates crate location upon drop' do
+    it 'updates crate location upon movement' do
       subject.instruct('n')
-      subject.instruct('d')
       expect(crate).to have_received(:update).with([0,1])
     end
 

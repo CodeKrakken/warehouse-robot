@@ -49,6 +49,7 @@ class Robot
       @location[0] += 1 if direction == 'e'
       @location[0] -= 1 if direction == 'w'
       @location[1] -= 1 if direction == 's'
+      @crate.update(@location) if @crate
       @location
     else
       'Cannot move there.'
@@ -83,7 +84,6 @@ class Robot
   def drop
     return 'No crate to drop.' if !@crate
     return 'Cannot drop crate here.' if warehouse.check(@location) == true
-    @crate.update(@location)
     warehouse.crates.push(@crate)
     @crate = nil
     return 'Dropped crate gently.'

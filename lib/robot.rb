@@ -20,11 +20,15 @@ class Robot
     when 'w'
       move('w')
     when 'ne'
-      move('n')
-      move('e')
+        move('n')
+        move('e')
     when 'sw'
-      move('s')
-      move('w')
+      if allowed?
+        move('s')
+        move('w')
+      else
+        'Cannot move there.'
+      end
     when 'nw'
       move('n')
       move('w')
@@ -44,7 +48,7 @@ class Robot
   private
 
   def move(direction)
-    if allowed?(direction)
+    if allowed?
       @location[1] += 1 if direction == 'n'
       @location[0] += 1 if direction == 'e'
       @location[0] -= 1 if direction == 'w'
@@ -56,11 +60,8 @@ class Robot
     end
   end
 
-  def allowed?(direction)
-    return @location[1] < 5 if direction == 'n'
-    return @location[1] > -5 if direction == 's'
-    return @location[0] < 5 if direction == 'e'
-    return @location[0] > -5 if direction == 'w'
+  def allowed?
+    (@location[1].abs < @warehouse.dimensions[1]/2 && @location[0].abs < @warehouse.dimensions[0]/2)
   end
 
   def error

@@ -10,6 +10,7 @@ describe Robot do
     allow(warehouse).to receive(:crates).and_return([crate])
     allow(warehouse).to receive(:check)
     allow(crate).to receive(:location).and_return([0,0])
+    allow(warehouse).to receive(:dimensions).and_return([10, 10])
   end
 
   it 'has a location' do
@@ -50,6 +51,11 @@ describe Robot do
 
   it 'moves one space southeast when se is called' do
     expect(subject.instruct('se')).to eq [1, -1]
+  end
+
+  it 'does not move at all if move cannot be completed' do
+    5.times { subject.instruct('s') }
+    expect(subject.instruct('sw')).to eq('Cannot move there.')
   end
   
   it 'does not respond to incorrect instructions' do

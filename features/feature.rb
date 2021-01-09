@@ -88,3 +88,4 @@ robot.crate
 robot.instruct('n')
 robot.instruct('d')
 crate_2.location
+robot.crate

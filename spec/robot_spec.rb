@@ -131,19 +131,15 @@ describe Robot do
       expect(crate).to have_received(:update).with([0,1])
     end
 
-    context 'dropping a crate' do
+    it 'returns crate to warehouse inventory when dropped' do
+      subject.instruct('d')
+      expect(warehouse.crates).to have_received(:push)
+    end
 
-      before(:each) do
-        subject.instruct('d')
-      end
-
-      it 'will drop the crate it is holding when instructed' do
-        expect(subject.instruct('d')).to change(subject.crate).from(crate).to(NilClass)
-      end
-  
-      it 'returns crate to warehouse inventory when dropped' do
-        expect(warehouse.crates).to have_received(:push)
-      end
-    end    
+    it 'will drop the crate it is holding when instructed' do
+      subject.instruct('d')
+      # expect(subject.instruct('d')).to change(subject.crate).from(crate).to(NilClass)
+      expect(subject.crate).to be nil
+    end
   end
 end

@@ -137,9 +137,7 @@ describe Robot do
     end
 
     it 'will drop the crate it is holding when instructed' do
-      subject.instruct('d')
-      # expect(subject.instruct('d')).to change(subject.crate).from(crate).to(NilClass)
-      expect(subject.crate).to be nil
+      expect { subject.instruct('d') }.to change { subject.crate }.from(crate).to(nil)
     end
   end
 end

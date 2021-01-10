@@ -3,6 +3,7 @@
 require './lib/robot'
 require './lib/warehouse'
 require './lib/crate'
+require 'pry'
 
 #create instances
 
@@ -19,6 +20,15 @@ crate_2
 crate_3
 robot
 
+# warehouse receive crates
+
+warehouse.crates
+warehouse.receive(crate, 0, 0)
+warehouse.receive(crate_2, 5, 5)
+warehouse.receive(crate_2, 5, 5)
+warehouse.receive(crate_3, 5, 5)
+warehouse.crates
+
 # move robot
 
 robot.instruct('e')
@@ -29,7 +39,6 @@ robot.instruct('ne')
 robot.instruct('sw')
 robot.instruct('nw')
 robot.instruct('se')
-
 
 # edgecase
 
@@ -57,18 +66,10 @@ robot.location
 5.times { robot.instruct('w') }
 5.times { robot.instruct('n') }
 robot.location
+binding.pry
 robot.instruct('w')
 robot.instruct('nw')
 robot.location
-
-# warehouse receive crates
-
-warehouse.crates
-warehouse.receive(crate, 0, 0)
-warehouse.receive(crate_2, 5, 5)
-warehouse.receive(crate_2, 5, 5)
-warehouse.receive(crate_3, 5, 5)
-warehouse.crates
 
 # robot grab function
 

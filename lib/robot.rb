@@ -12,7 +12,7 @@ class Robot
   def instruct(instruction)
     case instruction
     when 'n'
-      @location[1] + 1 <= warehouse.dimensions[1]/2 ? move('n') : 'Cannot move there.'
+      allowed?('n') ? move('n') : 'Cannot move there.'
     when 'e'
       @location[0] + 1 <= warehouse.dimensions[0]/2 ? move('e') : 'Cannot move there.'
     when 's'
@@ -34,7 +34,7 @@ class Robot
         'Cannot move there.'
       end
     when 'nw'
-      if @location[1].abs < warehouse.dimensions[1]/2 && (@location[0] - 1).abs <= warehouse.dimensions[0]/2
+      if @location[1] + 1 <= warehouse.dimensions[1]/2 && (@location[0] - 1).abs <= warehouse.dimensions[0]/2
         move('n')
         move('w')
       else
@@ -57,7 +57,7 @@ class Robot
     
   end
 
-  private
+  # private
 
   def move(direction)
     # if allowed?(direction)
@@ -73,10 +73,10 @@ class Robot
   end
 
   def allowed?(direction)
-    @location[1].abs < @warehouse.dimensions[1]/2 if direction == 'n'
-    @location[0].abs < @warehouse.dimensions[0]/2 if direction == 'e'
-    @location[0].abs < @warehouse.dimensions[0]/2 if direction == 'w'
-    @location[1].abs < @warehouse.dimensions[1]/2 if direction == 's'
+    return @location[1] + 1 <= warehouse.dimensions[1]/2 if direction == 'n'
+    return @location[0] + 1 <= warehouse.dimensions[0]/2 if direction == 'e'
+    return @location[0].abs < @warehouse.dimensions[0]/2 if direction == 'w'
+    return @location[1].abs < @warehouse.dimensions[1]/2 if direction == 's'
   end
 
   def error

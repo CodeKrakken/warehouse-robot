@@ -14,7 +14,7 @@ class Robot
     when 'n'
       allowed?('n') ? move('n') : 'Cannot move there.'
     when 'e'
-      @location[0] + 1 <= warehouse.dimensions[0]/2 ? move('e') : 'Cannot move there.'
+      allowed?('e') ? move('e') : 'Cannot move there.'
     when 's'
       (@location[1] - 1).abs <= warehouse.dimensions[1]/2 ? move('s') : 'Cannot move there.'
     when 'w'

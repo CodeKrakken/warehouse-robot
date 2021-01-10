@@ -66,7 +66,6 @@ robot.location
 5.times { robot.instruct('w') }
 5.times { robot.instruct('n') }
 robot.location
-binding.pry
 robot.instruct('w')
 robot.instruct('nw')
 robot.location

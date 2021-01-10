@@ -74,6 +74,7 @@ warehouse.crates
 
 robot.instruct('g')
 10.times { robot.instruct('e') }
+5.times { robot.instruct('n') }
 robot.location
 warehouse.crates
 robot.instruct('g')

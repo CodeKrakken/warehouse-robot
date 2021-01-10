@@ -12,29 +12,41 @@ class Robot
   def instruct(instruction)
     case instruction
     when 'n'
-      move('n')
+      @location[1] + 1 <= warehouse.dimensions[1]/2 ? move('n') : 'Cannot move there.'
     when 'e'
-      move('e')
+      @location[0] + 1 <= warehouse.dimensions[0]/2 ? move('e') : 'Cannot move there.'
     when 's'
-      move('s')
+      (@location[1] - 1).abs <= warehouse.dimensions[1]/2 ? move('s') : 'Cannot move there.'
     when 'w'
-      move('w')
+      (@location[0] - 1).abs <= warehouse.dimensions[0]/2 ? move('w') : 'Cannot move there.'
     when 'ne'
+      if @location[1].abs < warehouse.dimensions[1]/2 && @location[0].abs < warehouse.dimensions[0]/2
         move('n')
         move('e')
+      else
+        'Cannot move there.'
+      end
     when 'sw'
-      if allowed?
+      if @location[1].abs < warehouse.dimensions[1]/2 && @location[0].abs < warehouse.dimensions[0]/2
         move('s')
         move('w')
       else
         'Cannot move there.'
       end
     when 'nw'
-      move('n')
-      move('w')
+      if @location[1].abs < warehouse.dimensions[1]/2 && @location[0].abs < warehouse.dimensions[0]/2
+        move('n')
+        move('w')
+      else
+        'Cannot move there.'
+      end
     when 'se'
-      move('s')
-      move('e')
+      if @location[1].abs < warehouse.dimensions[1]/2 && @location[0].abs < warehouse.dimensions[0]/2
+        move('s')
+        move('e')
+      else
+        'Cannot move there.'
+      end
     when 'g'
       grab
     when 'd'
@@ -48,20 +60,23 @@ class Robot
   private
 
   def move(direction)
-    if allowed?
+    # if allowed?(direction)
       @location[1] += 1 if direction == 'n'
       @location[0] += 1 if direction == 'e'
       @location[0] -= 1 if direction == 'w'
       @location[1] -= 1 if direction == 's'
       @crate.update(@location) if @crate
       @location
-    else
-      'Cannot move there.'
-    end
+    # else
+    #   'Cannot move there.'
+    # end
   end
 
-  def allowed?
-    (@location[1].abs < @warehouse.dimensions[1]/2 && @location[0].abs < @warehouse.dimensions[0]/2)
+  def allowed?(direction)
+    @location[1].abs < @warehouse.dimensions[1]/2 if direction == 'n'
+    @location[0].abs < @warehouse.dimensions[0]/2 if direction == 'e'
+    @location[0].abs < @warehouse.dimensions[0]/2 if direction == 'w'
+    @location[1].abs < @warehouse.dimensions[1]/2 if direction == 's'
   end
 
   def error

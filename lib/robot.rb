@@ -16,9 +16,9 @@ class Robot
     when 'e'
       allowed?('e') ? move('e') : 'Cannot move there.'
     when 's'
-      (@location[1] - 1).abs <= warehouse.dimensions[1]/2 ? move('s') : 'Cannot move there.'
+      allowed?('s') ? move('s') : 'Cannot move there.'
     when 'w'
-      (@location[0] - 1).abs <= warehouse.dimensions[0]/2 ? move('w') : 'Cannot move there.'
+      allowed?('w') ? move('w') : 'Cannot move there.'
     when 'ne'
       if @location[1] + 1 <= warehouse.dimensions[1]/2 && @location[0] + 1 <= warehouse.dimensions[0]/2
         move('n')
@@ -75,7 +75,7 @@ class Robot
   def allowed?(direction)
     return @location[1] + 1 <= warehouse.dimensions[1]/2 if direction == 'n'
     return @location[0] + 1 <= warehouse.dimensions[0]/2 if direction == 'e'
-    return @location[0].abs < @warehouse.dimensions[0]/2 if direction == 'w'
+    return (@location[0] - 1).abs <= warehouse.dimensions[0]/2 if direction == 'w'
     return (@location[1] - 1).abs <= warehouse.dimensions[1]/2 if direction == 's'
   end
 

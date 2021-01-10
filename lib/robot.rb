@@ -12,21 +12,21 @@ class Robot
   def instruct(instruction)
     case instruction
     when 'n'
-      allowed?('n') ? move('n', :+, 1) : 'Cannot move there.'
+      allowed?('n') ? move(:+, 1) : 'Cannot move there.'
     when 'e'
-      allowed?('e') ? move('e', :+, 0) : 'Cannot move there.'
+      allowed?('e') ? move(:+, 0) : 'Cannot move there.'
     when 's'
-      allowed?('s') ? move('s', :-, 1) : 'Cannot move there.'
+      allowed?('s') ? move(:-, 1) : 'Cannot move there.'
     when 'w'
-      allowed?('w') ? move('w', :-, 0) : 'Cannot move there.'
+      allowed?('w') ? move(:-, 0) : 'Cannot move there.'
     when 'ne'
-      allowed?('n') && allowed?('e') ? move('n', :+, 1) && move('e', :+, 0) : 'Cannot move there.'
+      allowed?('n') && allowed?('e') ? move(:+, 1) && move(:+, 0) : 'Cannot move there.'
     when 'sw'
-      allowed?('s') && allowed?('w') ? move('s', :-, 1) && move('w', :-, 0) : 'Cannot move there.'
+      allowed?('s') && allowed?('w') ? move(:-, 1) && move(:-, 0) : 'Cannot move there.'
     when 'nw'
-      allowed?('n') && allowed?('w') ? move('n', :+, 1) && move('w', :-, 0) : 'Cannot move there.'
+      allowed?('n') && allowed?('w') ? move(:+, 1) && move(:-, 0) : 'Cannot move there.'
     when 'se'
-      allowed?('s') && allowed?('e') ? move('s', :-, 1) && move('e', :+, 0) : 'Cannot move there.'
+      allowed?('s') && allowed?('e') ? move(:-, 1) && move(:+, 0) : 'Cannot move there.'
     when 'g'
       grab
     when 'd'
@@ -39,8 +39,8 @@ class Robot
 
   # private
 
-  def move(direction, operator=nil, index=nil)
-    @location [index] = @location[index].send(operator, 1)
+  def move(operator, index)
+    @location[index] = @location[index].send(operator, 1)
     @crate.update(@location) if @crate
     @location
   end

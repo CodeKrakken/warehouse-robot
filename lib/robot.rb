@@ -14,19 +14,19 @@ class Robot
     when 'n'
       allowed?('n') ? move('n', :+, 1) : 'Cannot move there.'
     when 'e'
-      allowed?('e') ? move('e') : 'Cannot move there.'
+      allowed?('e') ? move('e', :+, 0) : 'Cannot move there.'
     when 's'
       allowed?('s') ? move('s') : 'Cannot move there.'
     when 'w'
       allowed?('w') ? move('w') : 'Cannot move there.'
     when 'ne'
-      allowed?('n') && allowed?('e') ? move('n', :+, 1) && move('e') : 'Cannot move there.'
+      allowed?('n') && allowed?('e') ? move('n', :+, 1) && move('e', :+, 0) : 'Cannot move there.'
     when 'sw'
       allowed?('s') && allowed?('w') ? move('s') && move('w') : 'Cannot move there.'
     when 'nw'
       allowed?('n') && allowed?('w') ? move('n', :+, 1) && move('w') : 'Cannot move there.'
     when 'se'
-      allowed?('s') && allowed?('e') ? move('s') && move('e') : 'Cannot move there.'
+      allowed?('s') && allowed?('e') ? move('s') && move('e', :+, 0) : 'Cannot move there.'
     when 'g'
       grab
     when 'd'
@@ -42,9 +42,9 @@ class Robot
   def move(direction, operator=nil, index=nil)
     # if allowed?(direction)
     # binding.pry
-    @location [index] = @location[index].send(operator, 1) if direction == 'n'
+    @location [index] = @location[index].send(operator, 1) if direction == 'n' || direction == 'e'
     # @location[1] += 1 if direction == 'n'
-    @location[0] += 1 if direction == 'e'
+    # @location[0] += 1 if direction == 'e'
     @location[0] -= 1 if direction == 'w'
     @location[1] -= 1 if direction == 's'
     @crate.update(@location) if @crate

@@ -12,7 +12,7 @@ class Robot
   def instruct(instruction)
     case instruction
     when 'n'
-      allowed?('n') ? move(:+, 1) : 'Cannot move there.'
+      allowed?('n', :+, 1) ? move(:+, 1) : 'Cannot move there.'
     when 'e'
       allowed?('e') ? move(:+, 0) : 'Cannot move there.'
     when 's'
@@ -20,11 +20,11 @@ class Robot
     when 'w'
       allowed?('w') ? move(:-, 0) : 'Cannot move there.'
     when 'ne'
-      allowed?('n') && allowed?('e') ? move(:+, 1) && move(:+, 0) : 'Cannot move there.'
+      allowed?('n', :+, 1) && allowed?('e') ? move(:+, 1) && move(:+, 0) : 'Cannot move there.'
     when 'sw'
       allowed?('s') && allowed?('w') ? move(:-, 1) && move(:-, 0) : 'Cannot move there.'
     when 'nw'
-      allowed?('n') && allowed?('w') ? move(:+, 1) && move(:-, 0) : 'Cannot move there.'
+      allowed?('n', :+, 1) && allowed?('w') ? move(:+, 1) && move(:-, 0) : 'Cannot move there.'
     when 'se'
       allowed?('s') && allowed?('e') ? move(:-, 1) && move(:+, 0) : 'Cannot move there.'
     when 'g'
@@ -45,8 +45,8 @@ class Robot
     @location
   end
 
-  def allowed?(direction)
-    return @location[1] + 1 <= warehouse.dimensions[1]/2 if direction == 'n'
+  def allowed?(direction, operator=nil, index=nil)
+    return @location[index].send(operator, 1) <= warehouse.dimensions[index]/2 if direction == 'n'
     return @location[0] + 1 <= warehouse.dimensions[0]/2 if direction == 'e'
     return (@location[0] - 1).abs <= warehouse.dimensions[0]/2 if direction == 'w'
     return (@location[1] - 1).abs <= warehouse.dimensions[1]/2 if direction == 's'

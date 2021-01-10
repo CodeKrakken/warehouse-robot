@@ -7,26 +7,30 @@ class Robot
   def initialize(warehouse)
     @warehouse = warehouse
     @location = [0,0]
+    @north = [:+, 1]
+    @south = [:-, 1]
+    @east  = [:+, 0]
+    @west  = [:-, 0]
   end
 
   def instruct(instruction)
     case instruction
     when 'n'
-      allowed?(:+, 1) ? move(:+, 1) : 'Cannot move there.'
+      allowed?(@north) ? move(@north) : 'Cannot move there.'
     when 'e'
-      allowed?(:+, 0) ? move(:+, 0) : 'Cannot move there.'
+      allowed?(@east) ? move(@east) : 'Cannot move there.'
     when 's'
-      allowed?(:-, 1) ? move(:-, 1) : 'Cannot move there.'
+      allowed?(@south) ? move(@south) : 'Cannot move there.'
     when 'w'
-      allowed?(:-, 0) ? move(:-, 0) : 'Cannot move there.'
+      allowed?(@west) ? move(@west) : 'Cannot move there.'
     when 'ne'
-      allowed?(:+, 1) && allowed?(:+, 0) ? move(:+, 1) && move(:+, 0) : 'Cannot move there.'
+      allowed?(@north) && allowed?(@east) ? move(@north) && move(@east) : 'Cannot move there.'
     when 'sw'
-      allowed?(:-, 1) && allowed?(:-, 0) ? move(:-, 1) && move(:-, 0) : 'Cannot move there.'
+      allowed?(@south) && allowed?(@west) ? move(@south) && move(@west) : 'Cannot move there.'
     when 'nw'
-      allowed?(:+, 1) && allowed?(:-, 0) ? move(:+, 1) && move(:-, 0) : 'Cannot move there.'
+      allowed?(@north) && allowed?(@west) ? move(@north) && move(@west) : 'Cannot move there.'
     when 'se'
-      allowed?(:-, 1) && allowed?(:+, 0) ? move(:-, 1) && move(:+, 0) : 'Cannot move there.'
+      allowed?(@south) && allowed?(@east) ? move(@south) && move(@east) : 'Cannot move there.'
     when 'g'
       grab
     when 'd'
@@ -39,14 +43,14 @@ class Robot
 
   # private
 
-  def move(operator, index)
-    @location[index] = @location[index].send(operator, 1)
+  def move(operator_index)
+    @location[operator_index[1]] = @location[operator_index[1]].send(operator_index[0], 1)
     @crate.update(@location) if @crate
     @location
   end
 
-  def allowed?(operator=nil, index=nil)
-    return @location[index].send(operator, 1).abs <= warehouse.dimensions[index]/2
+  def allowed?(array)
+    return @location[array[1]].send(array[0], 1).abs <= warehouse.dimensions[array[1]]/2
   end
 
   def error

@@ -12,21 +12,21 @@ class Robot
   def instruct(instruction)
     case instruction
     when 'n'
-      allowed?('n', :+, 1) ? move(:+, 1) : 'Cannot move there.'
+      allowed?(:+, 1) ? move(:+, 1) : 'Cannot move there.'
     when 'e'
-      allowed?('e', :+, 0) ? move(:+, 0) : 'Cannot move there.'
+      allowed?(:+, 0) ? move(:+, 0) : 'Cannot move there.'
     when 's'
-      allowed?('s', :-, 1) ? move(:-, 1) : 'Cannot move there.'
+      allowed?(:-, 1) ? move(:-, 1) : 'Cannot move there.'
     when 'w'
-      allowed?('w') ? move(:-, 0) : 'Cannot move there.'
+      allowed?(:-, 0) ? move(:-, 0) : 'Cannot move there.'
     when 'ne'
-      allowed?('n', :+, 1) && allowed?('e', :+, 0) ? move(:+, 1) && move(:+, 0) : 'Cannot move there.'
+      allowed?(:+, 1) && allowed?(:+, 0) ? move(:+, 1) && move(:+, 0) : 'Cannot move there.'
     when 'sw'
-      allowed?('s', :-, 1) && allowed?('w') ? move(:-, 1) && move(:-, 0) : 'Cannot move there.'
+      allowed?(:-, 1) && allowed?(:-, 0) ? move(:-, 1) && move(:-, 0) : 'Cannot move there.'
     when 'nw'
-      allowed?('n', :+, 1) && allowed?('w') ? move(:+, 1) && move(:-, 0) : 'Cannot move there.'
+      allowed?(:+, 1) && allowed?(:-, 0) ? move(:+, 1) && move(:-, 0) : 'Cannot move there.'
     when 'se'
-      allowed?('s', :-, 1) && allowed?('e', :+, 0) ? move(:-, 1) && move(:+, 0) : 'Cannot move there.'
+      allowed?(:-, 1) && allowed?(:+, 0) ? move(:-, 1) && move(:+, 0) : 'Cannot move there.'
     when 'g'
       grab
     when 'd'
@@ -45,11 +45,8 @@ class Robot
     @location
   end
 
-  def allowed?(direction, operator=nil, index=nil)
-    return @location[index].send(operator, 1) <= warehouse.dimensions[index]/2 if direction == 'n' || direction == 'e'
-    # return @location[0] + 1 <= warehouse.dimensions[0]/2 if direction == 'e'
-    return (@location[0] - 1).abs <= warehouse.dimensions[0]/2 if direction == 'w'
-    return (@location[1] - 1).abs <= warehouse.dimensions[1]/2 if direction == 's'
+  def allowed?(operator=nil, index=nil)
+    return @location[index].send(operator, 1).abs <= warehouse.dimensions[index]/2
   end
 
   def error

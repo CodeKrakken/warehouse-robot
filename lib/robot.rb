@@ -26,13 +26,13 @@ class Robot
         'Cannot move there.'
       end
     when 'sw'
-      if allowed?('s') && (@location[0] - 1).abs <= warehouse.dimensions[0]/2
+      if allowed?('s') && allowed?('w')
         move('s') && move('w')
       else
         'Cannot move there.'
       end
     when 'nw'
-      if allowed?('n') && (@location[0] - 1).abs <= warehouse.dimensions[0]/2
+      if allowed?('n') && allowed?('w')
         move('n') && move('w')
       else
         'Cannot move there.'

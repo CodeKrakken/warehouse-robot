@@ -22,11 +22,7 @@ class Robot
     when 'ne'
       allowed?('n') && allowed?('e') ? move('n') && move('e') : 'Cannot move there.'
     when 'sw'
-      if allowed?('s') && allowed?('w')
-        move('s') && move('w')
-      else
-        'Cannot move there.'
-      end
+      allowed?('s') && allowed?('w') ? move('s') && move('w') : 'Cannot move there.'
     when 'nw'
       if allowed?('n') && allowed?('w')
         move('n') && move('w')

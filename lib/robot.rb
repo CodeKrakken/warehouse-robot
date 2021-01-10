@@ -20,25 +20,25 @@ class Robot
     when 'w'
       allowed?('w') ? move('w') : 'Cannot move there.'
     when 'ne'
-      if @location[1] + 1 <= warehouse.dimensions[1]/2 && @location[0] + 1 <= warehouse.dimensions[0]/2
+      if allowed?('n') && allowed?('e')
         move('n') && move('e')
       else
         'Cannot move there.'
       end
     when 'sw'
-      if (@location[1] - 1).abs <= warehouse.dimensions[1]/2 && (@location[0] - 1).abs <= warehouse.dimensions[0]/2
+      if allowed?('s') && (@location[0] - 1).abs <= warehouse.dimensions[0]/2
         move('s') && move('w')
       else
         'Cannot move there.'
       end
     when 'nw'
-      if @location[1] + 1 <= warehouse.dimensions[1]/2 && (@location[0] - 1).abs <= warehouse.dimensions[0]/2
+      if allowed?('n') && (@location[0] - 1).abs <= warehouse.dimensions[0]/2
         move('n') && move('w')
       else
         'Cannot move there.'
       end
     when 'se'
-      if (@location[1] - 1).abs <= warehouse.dimensions[1]/2 && @location[0] + 1 <= warehouse.dimensions[0]/2
+      if allowed?('s') && allowed?('e')
         move('s') && move('e')
       else
         'Cannot move there.'

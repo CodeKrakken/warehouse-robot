@@ -76,7 +76,7 @@ class Robot
     return @location[1] + 1 <= warehouse.dimensions[1]/2 if direction == 'n'
     return @location[0] + 1 <= warehouse.dimensions[0]/2 if direction == 'e'
     return @location[0].abs < @warehouse.dimensions[0]/2 if direction == 'w'
-    return @location[1].abs < @warehouse.dimensions[1]/2 if direction == 's'
+    return (@location[1] - 1).abs <= warehouse.dimensions[1]/2 if direction == 's'
   end
 
   def error

@@ -53,8 +53,27 @@ describe Robot do
     expect(subject.instruct('se')).to eq [1, -1]
   end
 
-  it 'does not move at all if move cannot be completed' do
+  it 'does not move at all if south move cannot be completed' do
     5.times { subject.instruct('s') }
+    expect(subject.instruct('sw')).to eq('Cannot move there.')
+    expect(subject.instruct('se')).to eq('Cannot move there.')
+  end
+
+  it 'does not move at all if north move cannot be completed' do
+    5.times { subject.instruct('n') }
+    expect(subject.instruct('nw')).to eq('Cannot move there.')
+    expect(subject.instruct('ne')).to eq('Cannot move there.')
+  end
+
+  it 'does not move at all if east move cannot be completed' do
+    5.times { subject.instruct('e') }
+    expect(subject.instruct('ne')).to eq('Cannot move there.')
+    expect(subject.instruct('se')).to eq('Cannot move there.')
+  end
+
+  it 'does not move at all if west move cannot be completed' do
+    5.times { subject.instruct('w') }
+    expect(subject.instruct('nw')).to eq('Cannot move there.')
     expect(subject.instruct('sw')).to eq('Cannot move there.')
   end
   

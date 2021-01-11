@@ -16,7 +16,7 @@ class Robot
   def instruct(instruction)
     case instruction
     when 'N'
-      allowed?(@north) ? move(@north) : 'Cannot move there.'
+      allowed?(@north) ? move(@north) : move_error
     when 'E'
       allowed?(@east) ? move(@east) : 'Cannot move there.'
     when 'S'
@@ -67,6 +67,10 @@ class Robot
     @crate = nil
     puts 'Dropped crate gently.'
     return 'Dropped crate gently.'
+  end
+
+  def move_error
+    (puts 'Cannot move there.' && 'Cannot move there.')
   end
 
 end

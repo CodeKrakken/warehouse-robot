@@ -15,37 +15,38 @@ class Robot
 
   def instruct(instruction)
     case instruction
-    when 'n'
+    when 'N'
       allowed?(@north) ? move(@north) : 'Cannot move there.'
-    when 'e'
+    when 'E'
       allowed?(@east) ? move(@east) : 'Cannot move there.'
-    when 's'
+    when 'S'
       allowed?(@south) ? move(@south) : 'Cannot move there.'
-    when 'w'
+    when 'W'
       allowed?(@west) ? move(@west) : 'Cannot move there.'
-    when 'ne'
+    when 'NE'
       allowed?(@north) && allowed?(@east) ? move(@north) && move(@east) : 'Cannot move there.'
-    when 'sw'
+    when 'SW'
       allowed?(@south) && allowed?(@west) ? move(@south) && move(@west) : 'Cannot move there.'
-    when 'nw'
+    when 'NW'
       allowed?(@north) && allowed?(@west) ? move(@north) && move(@west) : 'Cannot move there.'
-    when 'se'
+    when 'SE'
       allowed?(@south) && allowed?(@east) ? move(@south) && move(@east) : 'Cannot move there.'
-    when 'g'
+    when 'G'
       grab
-    when 'd'
+    when 'D'
       drop
     else
-      error
+      "Invalid instruction."
     end
     
   end
 
-  # private
+  private
 
   def move(operator_index)
     @location[operator_index[1]] = @location[operator_index[1]].send(operator_index[0], 1)
     @crate.update(@location) if @crate
+    puts @location
     @location
   end
 
@@ -53,22 +54,10 @@ class Robot
     return @location[operator_index[1]].send(operator_index[0], 1).abs <= warehouse.dimensions[operator_index[1]]/2
   end
 
-  def error
-    "Invalid instruction."
-  end
-
   def grab
-    if @crate
-      'Already holding crate.'
-    else
-      @crate = @warehouse.crates.find {|crate| crate.location == @location }
-      unless !@crate
-        warehouse.crates.delete(@crate)
-        return @crate
-      else
-        "No crate to grab."
-      end
-    end
+    return 'Already holding crate.' if @crate
+    @crate = @warehouse.crates.find {|crate| crate.location == @location }
+    @crate ? warehouse.crates.delete(@crate) && @crate : "No crate to grab."  
   end
 
   def drop
@@ -76,6 +65,7 @@ class Robot
     return 'Cannot drop crate here.' if warehouse.check(@location) == true
     warehouse.crates.push(@crate)
     @crate = nil
+    puts 'Dropped crate gently.'
     return 'Dropped crate gently.'
   end
 

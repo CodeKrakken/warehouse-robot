@@ -49,8 +49,8 @@ class Robot
     @location
   end
 
-  def allowed?(array)
-    return @location[array[1]].send(array[0], 1).abs <= warehouse.dimensions[array[1]]/2
+  def allowed?(operator_index)
+    return @location[operator_index[1]].send(operator_index[0], 1).abs <= warehouse.dimensions[operator_index[1]]/2
   end
 
   def error

@@ -32,9 +32,9 @@ class Robot
     when 'SE'
       allowed?(@south) && allowed?(@east) ? move(@south) && move(@east) : 'Cannot move there.'
     when 'G'
-      grab
+      try_grab
     when 'D'
-      drop
+      try_drop
     else
       "Invalid instruction."
     end
@@ -54,23 +54,43 @@ class Robot
     return @location[operator_index[1]].send(operator_index[0], 1).abs <= warehouse.dimensions[operator_index[1]]/2
   end
 
-  def grab
+  def try_grab
     return 'Already holding crate.' if @crate
     @crate = @warehouse.crates.find {|crate| crate.location == @location }
-    @crate ? warehouse.crates.delete(@crate) && @crate : "No crate to grab."  
+    @crate ? grab : grab_error
+  end
+
+  def grab
+    warehouse.crates.delete(@crate)
+    puts "Grabbed crate #{@crate}."
+    @crate  
+  end
+
+  def grab_error
+    puts "No crate to grab."
+    "No crate to grab."
+  end
+
+  def try_drop
+    return 'No crate to drop.' if !@crate
+    warehouse.check(@location) ? drop_error : drop
   end
 
   def drop
-    return 'No crate to drop.' if !@crate
-    return 'Cannot drop crate here.' if warehouse.check(@location) == true
     warehouse.crates.push(@crate)
     @crate = nil
     puts 'Dropped crate gently.'
     return 'Dropped crate gently.'
   end
 
+  def drop_error
+    puts 'Cannot drop crate here.'
+    'Cannot drop crate here.'
+  end
+
   def move_error
-    (puts 'Cannot move there.' && 'Cannot move there.')
+    puts 'Cannot move there.'
+    'Cannot move there.'
   end
 
 end

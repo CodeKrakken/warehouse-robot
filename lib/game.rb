@@ -19,9 +19,12 @@ class Game
   end
 
   def run
+    puts "\nCOMMAND THE ROBOT."
     loop do
-      instruction = gets.chomp
-      @robot.instruct(instruction)
+      instructions = gets.chomp.split(' ')
+      instructions.each do |instruction|
+        @robot.instruct(instruction)
+      end
     end
   end
 end

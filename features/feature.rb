@@ -31,68 +31,68 @@ warehouse.crates
 
 # move robot
 
-robot.instruct('e')
-robot.instruct('w')
-robot.instruct('n')
-robot.instruct('s')
-robot.instruct('ne')
-robot.instruct('sw')
-robot.instruct('nw')
-robot.instruct('se')
+robot.instruct('E')
+robot.instruct('W')
+robot.instruct('N')
+robot.instruct('S')
+robot.instruct('NE')
+robot.instruct('SW')
+robot.instruct('NW')
+robot.instruct('SE')
 
 # edgecase
 
-robot.instruct('b')
+robot.instruct('B')
 
 # boundary test
 
-5.times { robot.instruct('n') }
+5.times { robot.instruct('N') }
 robot.location
-robot.instruct('n')
-robot.instruct('ne')
+robot.instruct('N')
+robot.instruct('NE')
 robot.location
-5.times { robot.instruct('e') }
-5.times { robot.instruct('s') }
+5.times { robot.instruct('E') }
+5.times { robot.instruct('S') }
 robot.location
-robot.instruct('e')
-robot.instruct('se')
+robot.instruct('E')
+robot.instruct('SE')
 robot.location
-5.times { robot.instruct('s') }
-5.times { robot.instruct('w') }
+5.times { robot.instruct('S') }
+5.times { robot.instruct('W') }
 robot.location
-robot.instruct('s')
-robot.instruct('sw')
+robot.instruct('S')
+robot.instruct('SW')
 robot.location
-5.times { robot.instruct('w') }
-5.times { robot.instruct('n') }
+5.times { robot.instruct('W') }
+5.times { robot.instruct('N') }
 robot.location
-robot.instruct('w')
-robot.instruct('nw')
+robot.instruct('W')
+robot.instruct('NW')
 robot.location
 
 # robot grab function
 
-robot.instruct('g')
-10.times { robot.instruct('e') }
-5.times { robot.instruct('n') }
+robot.instruct('G')
+10.times { robot.instruct('E') }
+5.times { robot.instruct('N') }
 robot.location
 warehouse.crates
-robot.instruct('g')
+robot.instruct('G')
 robot.crate
 warehouse.crates
-5.times { robot.instruct('s') }
-5.times { robot.instruct('w') }
+5.times { robot.instruct('S') }
+5.times { robot.instruct('W') }
 robot.location
 crate_2.location
 robot.crate
-robot.instruct('g')
+robot.instruct('G')
 
 # robot drop function
 
 robot.crate
-robot.instruct('d')
+robot.instruct('D')
 robot.crate
-robot.instruct('n')
-robot.instruct('d')
+robot.instruct('N')
+robot.instruct('D')
 crate_2.location
 robot.crate

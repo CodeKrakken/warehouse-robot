@@ -83,8 +83,7 @@ class Robot
   def drop
     warehouse.crates.push(@crate)
     @crate = nil
-    puts 'Dropped crate gently.'
-    return 'Dropped crate gently.'
+    respond('Dropped crate gently.')
   end
 
   def drop_error

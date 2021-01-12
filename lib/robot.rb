@@ -50,7 +50,7 @@ class Robot
 
   def try_move(directions)
     directions.each do |direction|
-      return move_error unless @location[direction[1]].send(direction[0], 1).abs <= warehouse.dimensions[direction[1]]/2
+      return respond('Cannot move there.') unless @location[direction[1]].send(direction[0], 1).abs <= warehouse.dimensions[direction[1]]/2
     end
     move(directions)
   end
@@ -64,11 +64,6 @@ class Robot
     @location
   end
 
-  def move_error
-    puts 'Cannot move there.'
-    'Cannot move there.'
-  end
-
   def try_grab
     return holding_crate_error if @crate
     @crate = @warehouse.crates.find {|crate| crate.location == @location }
@@ -77,8 +72,7 @@ class Robot
 
   def grab
     warehouse.crates.delete(@crate)
-    puts "Grabbed crate #{@crate}."
-    @crate  
+    respond("Grabbed crate #{@crate}.")
   end
 
   def holding_crate_error

@@ -109,7 +109,7 @@ describe Robot do
 
     it 'holds a crate once grabbed' do
       allow(warehouse.crates).to receive(:find).and_return(crate)
-      expect(subject.instruct('G')).to eq crate
+      expect(subject.instruct('G')).to eq "Grabbed crate #{crate}."
     end
   
     it 'removes crate from warehouse inventory once grabbed' do

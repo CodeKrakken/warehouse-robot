@@ -36,16 +36,16 @@ class Robot
     when 'D'
       try_drop
     else
-      instruction_error
+      respond("Invalid instruction.")
     end
     
   end
 
   private
 
-  def instruction_error
-    puts "Invalid instruction."
-    return "Invalid instruction."
+  def respond(response)
+    puts response
+    return response
   end
 
   def try_move(directions)

@@ -77,18 +77,13 @@ class Robot
 
   def try_drop
     return no_crate_error if !@crate
-    warehouse.occupied(@location) == true ? drop_error : drop
+    warehouse.occupied(@location) == true ? respond('Cannot drop crate here.') : drop
   end
 
   def drop
     warehouse.crates.push(@crate)
     @crate = nil
     respond('Dropped crate gently.')
-  end
-
-  def drop_error
-    puts 'Cannot drop crate here.'
-    'Cannot drop crate here.'
   end
 
   def no_crate_error

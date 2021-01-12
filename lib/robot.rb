@@ -16,21 +16,21 @@ class Robot
   def instruct(instruction)
     case instruction
     when 'N'
-      allowed?(@north) ? move(@north) : move_error
+      try_move([@north])
     when 'E'
-      allowed?(@east) ? move(@east) : 'Cannot move there.'
+      try_move([@east])
     when 'S'
-      allowed?(@south) ? move(@south) : 'Cannot move there.'
+      try_move([@south])
     when 'W'
-      allowed?(@west) ? move(@west) : 'Cannot move there.'
+      try_move([@west])
     when 'NE'
-      allowed?(@north) && allowed?(@east) ? move(@north) && move(@east) : 'Cannot move there.'
+      try_move([@north, @east])
     when 'SW'
-      allowed?(@south) && allowed?(@west) ? move(@south) && move(@west) : 'Cannot move there.'
+      try_move([@south, @west])
     when 'NW'
-      allowed?(@north) && allowed?(@west) ? move(@north) && move(@west) : 'Cannot move there.'
+      try_move([@north, @west])
     when 'SE'
-      allowed?(@south) && allowed?(@east) ? move(@south) && move(@east) : 'Cannot move there.'
+      try_move([@south, @east])
     when 'G'
       try_grab
     when 'D'
@@ -43,15 +43,25 @@ class Robot
 
   private
 
-  def move(operator_index)
-    @location[operator_index[1]] = @location[operator_index[1]].send(operator_index[0], 1)
+  def try_move(directions)
+    directions.each do |direction|
+      return move_error unless @location[direction[1]].send(direction[0], 1).abs <= warehouse.dimensions[direction[1]]/2
+    end
+    move(directions)
+  end
+
+  def move(directions)
+    directions.each do |direction|
+      @location[direction[1]] = @location[direction[1]].send(direction[0], 1)
+    end
     @crate.update(@location) if @crate
     puts @location
     @location
   end
 
-  def allowed?(operator_index)
-    return @location[operator_index[1]].send(operator_index[0], 1).abs <= warehouse.dimensions[operator_index[1]]/2
+  def move_error
+    puts 'Cannot move there.'
+    'Cannot move there.'
   end
 
   def try_grab
@@ -87,10 +97,4 @@ class Robot
     puts 'Cannot drop crate here.'
     'Cannot drop crate here.'
   end
-
-  def move_error
-    puts 'Cannot move there.'
-    'Cannot move there.'
-  end
-
 end

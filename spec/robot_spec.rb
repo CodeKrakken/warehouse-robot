@@ -8,7 +8,7 @@ describe Robot do
 
   before(:each) do
     allow(warehouse).to receive(:crates).and_return([crate])
-    allow(warehouse).to receive(:check)
+    allow(warehouse).to receive(:occupied)
     allow(crate).to receive(:location).and_return([0,0])
     allow(warehouse).to receive(:dimensions).and_return([10, 10])
   end
@@ -146,7 +146,7 @@ describe Robot do
     end
 
     it 'will not drop crate on another crate' do
-      allow(warehouse).to receive(:check).and_return(true)
+      allow(warehouse).to receive(:occupied).and_return(true)
       expect(subject.instruct('D')).to eq 'Cannot drop crate here.'
     end
 

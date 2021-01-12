@@ -49,19 +49,16 @@ class Robot
   end
 
   def try_move(directions)
-    directions.each do |direction|
-      return respond('Cannot move there.') unless @location[direction[1]].send(direction[0], 1).abs <= warehouse.dimensions[direction[1]]/2
-    end
+    directions.each { |direction| 
+      return respond('Cannot move there.') unless 
+      @location[direction[1]].send(direction[0], 1).abs <= warehouse.dimensions[direction[1]]/2 }
     move(directions)
   end
 
   def move(directions)
-    directions.each do |direction|
-      @location[direction[1]] = @location[direction[1]].send(direction[0], 1)
-    end
+    directions.each { |direction| @location[direction[1]] = @location[direction[1]].send(direction[0], 1) }
     @crate.update(@location) if @crate
-    puts @location
-    @location
+    respond(@location)
   end
 
   def try_grab

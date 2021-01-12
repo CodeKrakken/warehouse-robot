@@ -96,3 +96,5 @@ robot.instruct('N')
 robot.instruct('D')
 crate_2.location
 robot.crate
+robot.instruct('S')
+crate_2.location

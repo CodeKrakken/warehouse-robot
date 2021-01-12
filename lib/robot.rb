@@ -76,7 +76,7 @@ class Robot
   end
 
   def try_drop
-    return no_crate_error if !@crate
+    return respond('No crate to drop.') if !@crate
     warehouse.occupied(@location) == true ? respond('Cannot drop crate here.') : drop
   end
 
@@ -84,10 +84,5 @@ class Robot
     warehouse.crates.push(@crate)
     @crate = nil
     respond('Dropped crate gently.')
-  end
-
-  def no_crate_error
-    puts 'No crate to drop.'
-    return 'No crate to drop.'
   end
 end

@@ -65,7 +65,7 @@ class Robot
   end
 
   def try_grab
-    return holding_crate_error if @crate
+    return respond('Already holding crate.') if @crate
     @crate = @warehouse.crates.find {|crate| crate.location == @location }
     @crate ? grab : grab_error
   end
@@ -73,11 +73,6 @@ class Robot
   def grab
     warehouse.crates.delete(@crate)
     respond("Grabbed crate #{@crate}.")
-  end
-
-  def holding_crate_error
-    puts 'Already holding crate.'
-    return 'Already holding crate.'
   end
 
   def grab_error

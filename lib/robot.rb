@@ -73,20 +73,29 @@ class Robot
 
   def try_drop
     return 'No crate to drop.' if !@crate
-    warehouse.check(@location) ? drop_error : drop
-  end
-
-  def drop
+    return 'Cannot drop crate here.' if warehouse.check(@location) == true
     warehouse.crates.push(@crate)
     @crate = nil
     puts 'Dropped crate gently.'
     return 'Dropped crate gently.'
   end
 
-  def drop_error
-    puts 'Cannot drop crate here.'
-    'Cannot drop crate here.'
-  end
+  # def try_drop
+  #   return 'No crate to drop.' if !@crate
+  #   warehouse.check(@location) ? drop_error : drop
+  # end
+
+  # def drop
+  #   warehouse.crates.push(@crate)
+  #   @crate = nil
+  #   puts 'Dropped crate gently.'
+  #   return 'Dropped crate gently.'
+  # end
+
+  # def drop_error
+  #   puts 'Cannot drop crate here.'
+  #   'Cannot drop crate here.'
+  # end
 
   def move_error
     puts 'Cannot move there.'

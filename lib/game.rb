@@ -15,7 +15,7 @@ class Game
     @crate = Crate.new
     @crate_2 = Crate.new
     @warehouse.receive(@crate, 0, 0)
-    @warehouse.receive(@crate, 5, 5)
+    @warehouse.receive(@crate_2, 5, 5)
   end
 
   def run

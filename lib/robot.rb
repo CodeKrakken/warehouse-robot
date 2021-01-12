@@ -36,12 +36,17 @@ class Robot
     when 'D'
       try_drop
     else
-      "Invalid instruction."
+      instruction_error
     end
     
   end
 
   private
+
+  def instruction_error
+    puts "Invalid instruction."
+    return "Invalid instruction."
+  end
 
   def try_move(directions)
     directions.each do |direction|
@@ -65,7 +70,7 @@ class Robot
   end
 
   def try_grab
-    return 'Already holding crate.' if @crate
+    return holding_crate_error if @crate
     @crate = @warehouse.crates.find {|crate| crate.location == @location }
     @crate ? grab : grab_error
   end
@@ -76,13 +81,18 @@ class Robot
     @crate  
   end
 
+  def holding_crate_error
+    puts 'Already holding crate.'
+    return 'Already holding crate.'
+  end
+
   def grab_error
     puts "No crate to grab."
     "No crate to grab."
   end
 
   def try_drop
-    return 'No crate to drop.' if !@crate
+    return no_crate_error if !@crate
     warehouse.occupied(@location) == true ? drop_error : drop
   end
 
@@ -96,5 +106,10 @@ class Robot
   def drop_error
     puts 'Cannot drop crate here.'
     'Cannot drop crate here.'
+  end
+
+  def no_crate_error
+    puts 'No crate to drop.'
+    return 'No crate to drop.'
   end
 end

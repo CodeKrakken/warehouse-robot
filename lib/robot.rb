@@ -58,7 +58,7 @@ class Robot
 
   def move(directions)
     directions.each { |direction| @location[direction[1]] = @location[direction[1]].send(direction[0], 1) }
-    @crate.update(@location) if @crate
+    @crate.update(@location.dup) if @crate
     respond([@location[0], @location[1]])
   end
 
@@ -69,7 +69,6 @@ class Robot
   end
 
   def grab
-    # @crate.held = true
     warehouse.crates.delete(@crate)
     respond("Grabbed crate #{@crate}.")
   end
@@ -81,7 +80,6 @@ class Robot
 
   def drop
     warehouse.crates.push(@crate)
-    # @crate.held = false
     @crate = nil
     respond('Dropped crate gently.')
   end

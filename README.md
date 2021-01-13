@@ -3,9 +3,6 @@
 Modelling the actions of a hardworking warehouse robot, very much of the ilk of T.O.M. from TV's Bertha.
 
 We have installed a robot in our warehouse. This is the mechanism by which it can be controlled.
-
-The robot moves along a 10x10 grid in the warehouse, and will not move outside its confines.
-
 All of the commands to the robot consist of a single capital letter and different commands are dilineated by whitespace.
 
 ## Installation
@@ -22,6 +19,7 @@ Program runs in the command line. Start it with `ruby rungame.rb`
 
 Initially there is one crate in the north-east corner of the warehouse and one in the centre.
 
+* The robot moves along a 10x10 grid in the warehouse, and will not move outside its confines.
 * The robot will not grab a crate if it already holding one
 * The robot will not grab a crate if there is not one present
 * The robot will not drop a crate on another crate!

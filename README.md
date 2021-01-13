@@ -53,4 +53,6 @@ This was built with TDD. To run the tests:
 * `rspec` for the unit tests
 * `irb features/feature.rb` for the feature tests
 
-Feature test output extract:
+The amazing game in action:
+
+![warehouse_robot](https://user-images.githubusercontent.com/52076323/104477361-e9377000-55b8-11eb-8726-64282a37cbdf.png)

@@ -54,5 +54,3 @@ This was built with TDD. To run the tests:
 * `irb features/feature.rb` for the feature tests
 
 Feature test output extract:
-
-![feature](https://user-images.githubusercontent.com/52076323/104476223-e7b97800-55b7-11eb-8945-53cb4c8ad091.png)

@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 require 'warehouse'
 
 describe Warehouse do
-
   let(:crate) { double :crate }
-  let(:crate_2) { double :crate }
+  let(:crate2) { double :crate }
 
   before(:each) do
     allow(crate).to receive(:location).and_return([0, 0])
@@ -37,9 +38,9 @@ describe Warehouse do
   end
 
   it 'will not receive a crate in same location as existing one' do
-    allow(crate_2).to receive(:location).and_return([0, 0])
-    allow(crate_2).to receive(:update)
+    allow(crate2).to receive(:location).and_return([0, 0])
+    allow(crate2).to receive(:update)
     subject.receive(crate, 0, 0)
-    expect(subject.receive(crate_2, 0, 0)).to eq 'Position occupied.'
+    expect(subject.receive(crate2, 0, 0)).to eq 'Position occupied.'
   end
 end

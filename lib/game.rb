@@ -1,21 +1,19 @@
+# frozen_string_literal: true
+
 require_relative 'crate'
 require_relative 'warehouse'
 require_relative 'robot'
 
-class Game
-
-  attr_reader :warehouse
-  attr_reader :robot
-  attr_reader :crate
-  attr_reader :crate_2
+class Game # :nodoc:
+  attr_reader :warehouse, :robot, :crate, :crate2
 
   def initialize
     @warehouse = Warehouse.new
     @robot = Robot.new(@warehouse)
     @crate = Crate.new
-    @crate_2 = Crate.new
+    @crate2 = Crate.new
     @warehouse.receive(@crate, 0, 0)
-    @warehouse.receive(@crate_2, 5, 5)
+    @warehouse.receive(@crate2, 5, 5)
   end
 
   def run

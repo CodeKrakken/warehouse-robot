@@ -1,12 +1,11 @@
-class Robot
+# frozen_string_literal: true
 
-  attr_reader :location
-  attr_reader :warehouse
-  attr_reader :crate
+class Robot # :nodoc:
+  attr_reader :location, :warehouse, :crate
 
   def initialize(warehouse)
     @warehouse = warehouse
-    @location = [0,0]
+    @location = [0, 0]
     @north = [:+, 1]
     @south = [:-, 1]
     @east  = [:+, 0]
@@ -36,36 +35,37 @@ class Robot
     when 'D'
       try_drop
     else
-      respond("Invalid instruction.")
+      respond('Invalid instruction.')
     end
-    
   end
 
   private
 
   def respond(response)
-    print "#{response}"
+    print response.to_s
     puts ''
-    return response
+    response
   end
 
   def try_move(directions)
-    directions.each { |direction| 
-      return respond('Cannot move there.') unless 
-      @location[direction[1]].send(direction[0], 1).abs <= warehouse.dimensions[direction[1]]/2 }
+    directions.each do |direction|
+      return respond('Cannot move there.') unless
+      @location[direction[1]].send(direction[0], 1).abs <= warehouse.dimensions[direction[1]] / 2
+    end
     move(directions)
   end
 
   def move(directions)
     directions.each { |direction| @location[direction[1]] = @location[direction[1]].send(direction[0], 1) }
-    @crate.update(@location.dup) if @crate
+    @crate&.update(@location.dup)
     respond([@location[0], @location[1]])
   end
 
   def try_grab
     return respond('Already holding crate.') if @crate
-    @crate = @warehouse.crates.find {|crate| crate.location == @location }
-    @crate ? grab : respond("No crate to grab.")
+
+    @crate = @warehouse.crates.find { |crate| crate.location == @location }
+    @crate ? grab : respond('No crate to grab.')
   end
 
   def grab
@@ -74,7 +74,8 @@ class Robot
   end
 
   def try_drop
-    return respond('No crate to drop.') if !@crate
+    return respond('No crate to drop.') unless @crate
+
     warehouse.occupied(@location) == true ? respond('Cannot drop crate here.') : drop
   end
 

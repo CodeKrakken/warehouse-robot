@@ -1,17 +1,18 @@
-class Warehouse
+# frozen_string_literal: true
 
-  attr_reader :dimensions
-  attr_reader :crates
+class Warehouse # :nodoc:
+  attr_reader :dimensions, :crates
 
   def initialize
-    @dimensions = 10,10
+    @dimensions = 10, 10
     @crates = []
   end
 
-  def receive(crate, x, y)
-    crate.update([x, y])
+  def receive(crate, x_axis, y_axis)
+    crate.update([x_axis, y_axis])
     return 'Crate already in warehouse.' if @crates.include?(crate)
     return 'Position occupied.' if occupied(crate.location) == true
+
     @crates.push(crate)
   end
 
@@ -20,5 +21,4 @@ class Warehouse
       return true if crate.location == location
     end
   end
-
 end

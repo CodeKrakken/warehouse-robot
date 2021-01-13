@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # get files
 
 require './lib/robot'
@@ -5,28 +7,28 @@ require './lib/warehouse'
 require './lib/crate'
 require 'pry'
 
-#create instances
+# create instances
 
 warehouse = Warehouse.new
 robot = Robot.new(warehouse)
 crate = Crate.new
-crate_2 = Crate.new
-crate_3 = Crate.new
+crate2 = Crate.new
+crate3 = Crate.new
 
 # display instances
 
 crate
-crate_2
-crate_3
+crate2
+crate3
 robot
 
 # warehouse receive crates
 
 warehouse.crates
 warehouse.receive(crate, 0, 0)
-warehouse.receive(crate_2, 5, 5)
-warehouse.receive(crate_2, 5, 5)
-warehouse.receive(crate_3, 5, 5)
+warehouse.receive(crate2, 5, 5)
+warehouse.receive(crate2, 5, 5)
+warehouse.receive(crate3, 5, 5)
 warehouse.crates
 
 # move robot
@@ -83,7 +85,7 @@ warehouse.crates
 5.times { robot.instruct('S') }
 5.times { robot.instruct('W') }
 robot.location
-crate_2.location
+crate2.location
 robot.crate
 robot.instruct('G')
 
@@ -94,7 +96,7 @@ robot.instruct('D')
 robot.crate
 robot.instruct('N')
 robot.instruct('D')
-crate_2.location
+crate2.location
 robot.crate
 robot.instruct('S')
-crate_2.location
+crate2.location

@@ -9,6 +9,7 @@ The robot moves along a 10x10 grid in the warehouse, and will not move outside i
 All of the commands to the robot consist of a single capital letter and different commands are dilineated by whitespace.
 
 ## Installation
+
 ```
 git clone https://github.com/CodeKrakken/warehouse-robot.git
 cd warehouse-robot

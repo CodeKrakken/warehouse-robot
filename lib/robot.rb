@@ -60,8 +60,7 @@ class Robot # :nodoc:
       @location[direction[1]] = @location[direction[1]].send(direction[0], 1)
     end
     @crate.update(@location.dup) if @crate
-    puts @location
-    @location
+    respond(@location)
   end
 
   def try_grab

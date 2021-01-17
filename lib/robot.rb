@@ -56,9 +56,12 @@ class Robot # :nodoc:
   end
 
   def move(directions)
-    directions.each { |direction| @location[direction[1]] = @location[direction[1]].send(direction[0], 1) }
-    @crate&.update(@location.dup)
-    respond([@location[0], @location[1]])
+    directions.each do |direction|
+      @location[direction[1]] = @location[direction[1]].send(direction[0], 1)
+    end
+    @crate.update(@location) if @crate
+    puts @location
+    @location
   end
 
   def try_grab

@@ -59,7 +59,7 @@ class Robot # :nodoc:
     directions.each do |direction|
       @location[direction[1]] = @location[direction[1]].send(direction[0], 1)
     end
-    @crate.update(@location) if @crate
+    @crate.update(@location.dup) if @crate
     puts @location
     @location
   end

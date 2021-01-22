@@ -1,6 +1,6 @@
 # warehouse_robot
 
-Modelling the actions of a hardworking warehouse robot, very much of the ilk of T.O.M. from TV's Bertha.
+Modelling the actions of a hardworking warehouse robot, very much of the ilk of T.O.M. from TV's Bertha. See the JavaScript remix ![here](https://github.com/CodeKrakken/warehouse-robot-js.git)
 
 We have installed a robot in our warehouse. This is the mechanism by which it can be controlled. All of the commands to the robot consist of a single capital letter and different commands are dilineated by whitespace.
 
